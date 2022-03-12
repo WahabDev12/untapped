@@ -14,7 +14,6 @@ const Container = () => {
                     <p>This is a test</p>    
                     <p>This is a test</p>    
                     <p>This is a test</p>    
-                    <p>This is a test</p>    
                    
                 </div>
                 <div  className="job">1</div>
