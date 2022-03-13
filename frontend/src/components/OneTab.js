@@ -96,7 +96,7 @@ const OneTab = () => {
         </div>
           <span>Entrepreneurship</span>
         </OneTabStyled>
-.
+
         <OneTabStyled>
             <div className="communities-tab">
                 <p>DIRECT MESSAGES</p>
