@@ -1,6 +1,7 @@
 import { OneTabStyled } from "./styles/OneTab.Styled";
 import { Icon } from '@iconify/react';
 import "./topsection.css";
+import { SideInputStyled } from "./styles/SideInputStyled";
 
 
 const OneTab = () => {
@@ -101,10 +102,16 @@ const OneTab = () => {
                 <p>DIRECT MESSAGES</p>
             </div>
         </OneTabStyled>
+        <SideInputStyled>
 
-            <div className="search-tab">
-                 <input placeholder="Search..." type="search" className="search-communities" />
+            <div className="input-box">
+                    <Icon icon="akar-icons:search" height="18" inline={true} />
+            <div>
+              </div>
+              <input type="text" className="search-comm" placeholder="Search communities" />
             </div>
+
+        </SideInputStyled>
 
         <br></br>
 

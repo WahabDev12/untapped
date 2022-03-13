@@ -41,10 +41,10 @@ export const ModalStyled = styled.section`
         -webkit-transform: translate(0, -500%);
         -ms-transform: translate(0, -500%);
         transform: translate(0, -500%);
-        -webkit-transition: -webkit-transform 0.3s ease-out;
-        -moz-transition: -moz-transform 0.3s ease-out;
-        -o-transition: -o-transform 0.3s ease-out;
-        transition: transform 0.3s ease-out;
+        -webkit-transition: -webkit-transform 0.4s ease-out;
+        -moz-transition: -moz-transform 0.4s ease-out;
+        -o-transition: -o-transform 0.4s ease-out;
+        transition: transform 0.4s ease-out;
         
     }
 

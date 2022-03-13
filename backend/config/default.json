@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://jack:jack123@untapped.vmjfc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret":"TheOnePieceIsReal"
+}

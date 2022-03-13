@@ -6,9 +6,10 @@ export const ContainerStyled = styled.div`
     margin-top:1.2em;
     margin-left:20.5em;
     box-sizing: border-box;
-    height: 100vh;
+    height: fit-content;
     width:73.5%;
     padding: 10px 25px;
+    padding-bottom:35px;
     border: 1px solid #dadada;
     border-radius: 5px;
     overflow-y: hidden;
@@ -17,14 +18,13 @@ export const ContainerStyled = styled.div`
     .job-container{
         display:grid;
         grid-gap: 0.9375rem;
-        grid-template: auto/repeat(3, 1fr) [end];
-        justify-items: stretch;
+        grid-template: auto/repeat(3, 1fr);
         margin-top:1.2rem;
-        align-items: stretch;
+        
     }
 
     .alert{
-        font-size: .8125rem;
+        font-size: 0.8125rem;
         line-height: 1.125rem;
         text-transform: uppercase;
         color: #666;
@@ -100,6 +100,7 @@ export const ContainerStyled = styled.div`
         padding:10px;
         padding-left:15px;
         padding-right:15px;
+        cursor: pointer;
         outline:none;
         background-color: #fff;
         border:1px solid #0e0e0e;
@@ -110,6 +111,20 @@ export const ContainerStyled = styled.div`
 
     .job:hover{
         box-shadow: 0px 2px 8px rgb(0 0 0 / 8%);
+    }
+
+    @media (max-width: 950px) {
+        .job-container{
+            max-width: 100%;
+            display:block;
+
+        }
+
+        .job{
+            margin-top:1rem;
+        }
+        width:78%;
+        margin-left:6em;
     }
 
 
