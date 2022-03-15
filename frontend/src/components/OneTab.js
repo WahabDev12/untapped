@@ -133,7 +133,7 @@ const OneTab = () => {
              <div className="spacer"></div>
         
             <div className="version-div">
-                <small className="version">v.1.0.0</small>        
+                <small className="version">v1.0.0</small>        
             </div>
 
         </>

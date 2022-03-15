@@ -10,9 +10,10 @@ connectDB()
 
 const app = express()
 
-app.use('/api/users', userRoutes)
-
 app.use(express.json())
+
+app.use('/api/auth', userRoutes)
+
 
 app.use(notFound)
 app.use(errorHandler)
