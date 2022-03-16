@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
+import postRoutes from "./routes/postRoutes.js"
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ const app = express()
 app.use(express.json())
 
 app.use('/api/auth', userRoutes)
+app.use('/api/post', postRoutes)
 
 
 app.use(notFound)

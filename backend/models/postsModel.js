@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import Likes from './likesModel';
-
 
 const PostSchema = mongoose.Schema(
 
@@ -13,20 +11,37 @@ const PostSchema = mongoose.Schema(
             type:String,
             required:true
         },
+        image: {
+            data: Buffer,
+            contentType: String,
+        },
         groupId:{
             type: mongoose.Types.ObjectId,
             ref: "Group",
         },
-        author:{
-            type: mongoose.Types.ObjectId,
+        author_name:{
+            type: String,
+            required: true,
+            minlength: 3,
+            maxlength: 255,
+        },
+        author_id:{
+            type: mongoose.SchemaTypes.ObjectId,
             ref:"User"
+        },
+        author_profile:{
+            type: String,
+            ref:"User" 
         },
         hasImage: {
             type: Boolean,
             default: false,
         },
         likes: {
-            type: [Likes],
+            type: [{
+                type: mongoose.Types.ObjectId,       
+                ref: "User"
+              }],
             default: [],
         },
         comments: {
