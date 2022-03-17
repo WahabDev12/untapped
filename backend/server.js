@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js'
 import postRoutes from "./routes/postRoutes.js"
 import groupRoutes from './routes/groupRoutes.js'
 
+
 dotenv.config()
 
 connectDB()

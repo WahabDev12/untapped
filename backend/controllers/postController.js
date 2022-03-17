@@ -43,10 +43,10 @@ const createPost = asyncHandler(async (req,res) =>{
     .populate("author_id", "_id firstName lastName");
     
     communityToAdd.posts.push({
-        _id:post._id
+        _id: post._id
     })
 
-    await communityToAdd.save()
+    await communityToAdd.save();
 
     res.send({
         ...post._doc,
@@ -55,5 +55,7 @@ const createPost = asyncHandler(async (req,res) =>{
     });
 
 })
+
+
 
 export {createPost};
