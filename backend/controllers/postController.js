@@ -1,9 +1,11 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import Post from '../models/postsModel.js';
+import Group from '../models/groupModel.js';
 
+/* Creating a post and saving it to the database. */
 const createPost = asyncHandler(async (req,res) =>{
-    const {title, description} = req.body;
+    const {title, description, group} = req.body;
     
     const user = await User.findById(req.user._id);
   
@@ -12,33 +14,40 @@ const createPost = asyncHandler(async (req,res) =>{
         throw new Error("You br3 !!");
 
     }
+    const community = await Group.findOne({name: group}).select('group_privacy');
+    const communityToAdd =  await Group.findById(community._id);
+
     let post = {
         author_name: `${user.firstName} ${user.lastName}`,
         title,
+        group,
+        group_Id: community._id,
         description,
+        author_id: user._id,
         author_profile: user.profilePicture
     }
     if(req.files){
-        // const { data, mimetype } = req.files.file;
-        // post = {
-        //     ...post,
-        //     image: { data, contentType: mimetype },
-        //     hasImage: true,
-        // };
-        const {file} = req.files;
-        post = {    
+
+        const { data, mimetype } = req.files.file;
+        post = {
             ...post,
-            image:{data:file.data, contentType: file.mimetype},
-            hasImage: true
-        }
+            image: { data, contentType: mimetype },
+            hasImage: true,
+        };
+       
     }
+
     post = new Post(post);
     await post.save();
-    console.log(post);
     post = await Post.findById({ _id: post._id })
-      .populate("author_id", "_id firstName lastName");
-
+    .populate("author_id", "_id firstName lastName");
     
+    communityToAdd.posts.push({
+        _id:post._id
+    })
+
+    await communityToAdd.save()
+
     res.send({
         ...post._doc,
         likes: post.likes.length,

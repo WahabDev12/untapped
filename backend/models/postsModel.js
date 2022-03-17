@@ -15,9 +15,15 @@ const PostSchema = mongoose.Schema(
             data: Buffer,
             contentType: String,
         },
-        groupId:{
-            type: mongoose.Types.ObjectId,
+        group:{
+            type: String,
+            required:true,
             ref: "Group",
+        },
+        group_Id:{
+            type:mongoose.Types.ObjectId,
+            required:true,
+            ref:"Group"
         },
         author_name:{
             type: String,

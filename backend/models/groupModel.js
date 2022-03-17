@@ -9,10 +9,6 @@ const groupSchema = mongoose.Schema(
             minlength: 3,
             maxlength: 255,
         },
-        cover: {
-            data: Buffer,
-            contentType: String,
-        },
         description: {
             type: String,
             required: true,
@@ -65,6 +61,6 @@ const groupSchema = mongoose.Schema(
 
 )
 
-const Group = moongoose.model("Group",groupSchema);
+const Group = mongoose.model("Group",groupSchema);
 
 export default Group;
