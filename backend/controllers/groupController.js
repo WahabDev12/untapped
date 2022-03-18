@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import Group from '../models/groupModel.js';
+import Post from '../models/postsModel.js';
 
 /* Creating a new group and adding the admin to the members array. */
 const createGroup = asyncHandler(async (req,res)=> {
@@ -10,7 +11,7 @@ const createGroup = asyncHandler(async (req,res)=> {
 
     if(!user){
         res.status(400)
-        throw new Error("You br3 !!");
+        throw new Error("User no found !!");
     }
     
     let group = new Group({
@@ -38,7 +39,7 @@ const createPostByGroupId = asyncHandler(async(req,res)=>{
 
     if(!group || !user){
         res.status(400);
-        throw new Error("You br3 !!");
+        throw new Error("User or group not found!!");
     }
 
     const {title, description} = req.body;
@@ -76,7 +77,45 @@ const createPostByGroupId = asyncHandler(async(req,res)=>{
         comments: post.comments.length,
     });
     
-
 })
 
-export {createGroup, createPostByGroupId};
+const joinGroup = asyncHandler( async(req,res)=>{
+    const user = await User.findById(req.user._id).select('_id groups_joined firstName lastName');
+    const groupId = req.params.id;
+    const group = await Group.findById(groupId);
+    
+    if(!group){
+        res.status(400);
+        throw new Error("Group not found !!!")
+    }
+    if(!user){
+        res.status(400);
+        throw new Error("User not found")   
+    }
+    if(group.group_admin_id === user._id){
+        res.status(400).send("You are the Admin of the group")
+    }
+
+    const checkIsAlreadyMember = group.members.findIndex((member) => {
+        return member._id == user._id;
+    });
+
+    if(checkIsAlreadyMember !== -1) return res.status(400).send("You are already a member")
+
+    group.members.push({
+        _id: user._id,
+        name: `${user.firstName} ${user.lastName}`
+    })
+
+    await group.save();
+
+    user.groups_joined.push({
+        _id: group._id,
+        name: group.name
+    })
+
+    await user.save();
+    
+})
+
+export {createGroup, createPostByGroupId, joinGroup};

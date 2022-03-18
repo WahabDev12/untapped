@@ -11,7 +11,7 @@ const createPost = asyncHandler(async (req,res) =>{
   
     if(!user){
         res.status(400)
-        throw new Error("You br3 !!");
+        throw new Error("User not found");
 
     }
     const community = await Group.findOne({name: group}).select('group_privacy');

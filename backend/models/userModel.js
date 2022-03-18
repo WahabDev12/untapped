@@ -30,6 +30,19 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    groups_joined:{
+      type:[
+        {
+          _id:{
+            type: mongoose.Types.ObjectId,
+          },
+          group_name:{
+             type:String,
+          }
+        }
+      ],
+      default:[]
+    }
   },
   {
     timestamps: true,

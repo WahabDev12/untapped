@@ -17,7 +17,6 @@ const PostSchema = mongoose.Schema(
         },
         group:{
             type: String,
-            required:true,
             ref: "Group",
         },
         group_Id:{
