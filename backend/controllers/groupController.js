@@ -97,26 +97,23 @@ const joinGroup = asyncHandler( async(req,res)=>{
         throw new Error("You are the Admin !!!")
 
     }
-    const isMember = group.members.find((member) => {
+    const alreadyMember = group.members.find((member) => {
         return member._id.toString() === req.user._id.toString()
-        
     });   
 
-    console.log(isMember)
-
-    if(isMember){
+    if(alreadyMember){
         res.status(400)
-      throw new Error('Already a Member')
+        throw new Error('Already a Member')
     }
 
-    if(!isMember){
+    if(!alreadyMember){
         group.members.push({
             _id: user._id,
             name: `${user.firstName} ${user.lastName}`
         })
     
         await group.save();
-    
+
         user.groups_joined.push({
             _id: group._id, 
             group_name: group.name

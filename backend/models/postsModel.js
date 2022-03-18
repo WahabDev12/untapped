@@ -43,10 +43,14 @@ const PostSchema = mongoose.Schema(
             default: false,
         },
         likes: {
-            type: [{
-                type: mongoose.Types.ObjectId,       
-                ref: "User"
-              }],
+            type: [
+                {
+                _id:{
+                    type: mongoose.Types.ObjectId,       
+                    ref: "User"
+                }
+              }
+            ],
             default: [],
         },
         comments: {

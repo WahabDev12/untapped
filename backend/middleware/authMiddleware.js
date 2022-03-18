@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 const JWT_SECRET = "OnePiece";
+import Group from '../models/groupModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -15,7 +16,6 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, JWT_SECRET);
 
       req.user = await User.findById(decoded.id).select('-password');
-      // console.log(req.user)
 
       next()
     } 
@@ -42,4 +42,25 @@ const admin = (req, res, next) => {
   }
 }
 
-export { protect, admin }
+const groupAdmin = async (req,res,next) => {
+    try{
+
+      const group_id = req.params.id;
+      const user = req.user;
+      const group = await Group.findById(group_id).
+      populate('group_admin_id', '_id firstName lastName')
+
+      if(group.group_admin_id._id === user._id){
+          req.group = group
+          return next()
+      }
+      res.status(400).send("You are not the group's admin")
+
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).send(error.message);
+    }
+}
+
+export { protect, admin, groupAdmin }
