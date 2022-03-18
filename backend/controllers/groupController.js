@@ -80,7 +80,7 @@ const createPostByGroupId = asyncHandler(async(req,res)=>{
 })
 
 const joinGroup = asyncHandler( async(req,res)=>{
-    const user = await User.findById(req.user._id).select('_id groups_joined firstName lastName');
+    const user = await User.findById(req.user._id);
     const groupId = req.params.id;
     const group = await Group.findById(groupId);
     
@@ -93,28 +93,41 @@ const joinGroup = asyncHandler( async(req,res)=>{
         throw new Error("User not found")   
     }
     if(group.group_admin_id === user._id){
-        res.status(400).send("You are the Admin of the group")
+        res.status(400)
+        throw new Error("You are the Admin !!!")
+
+    }
+    const isMember = group.members.find((member) => {
+        return member._id.toString() === req.user._id.toString()
+        
+    });   
+
+    console.log(isMember)
+
+    if(isMember){
+        res.status(400)
+      throw new Error('Already a Member')
     }
 
-    const checkIsAlreadyMember = group.members.findIndex((member) => {
-        return member._id == user._id;
-    });
+    if(!isMember){
+        group.members.push({
+            _id: user._id,
+            name: `${user.firstName} ${user.lastName}`
+        })
+    
+        await group.save();
+    
+        user.groups_joined.push({
+            _id: group._id, 
+            group_name: group.name
+        })
+    
+        await user.save();
+    
+        res.send(group.members)
+    }
 
-    if(checkIsAlreadyMember !== -1) return res.status(400).send("You are already a member")
 
-    group.members.push({
-        _id: user._id,
-        name: `${user.firstName} ${user.lastName}`
-    })
-
-    await group.save();
-
-    user.groups_joined.push({
-        _id: group._id,
-        name: group.name
-    })
-
-    await user.save();
     
 })
 
