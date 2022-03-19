@@ -58,55 +58,78 @@ const createPost = asyncHandler(async (req,res) =>{
 })
 
 
+/* This code is adding a comment to a post. */
 const createComment = asyncHandler(async(req,res)=> {
     const user = await User.findById(req.user._id).select('_id firstName lastName');
     const postId = req.params.id;
 
-    const { userComment }  = req.body;
+    const { comment }  = req.body;
 
-    const post = await Post.findById(postId).select('_id')
+    const post = await Post.findById(postId)
+  
 
     if(post){
-        let comment = {
-            author: `${user.firstName} ${user.lastName}`,
-            comment: userComment,
+        let newComment = {
+            author_id: user._id,
+            author_name: `${user.firstName} ${user.lastName}`,
+            comment,
             post_id: postId
         }
 
-        comment = new Comment(comment);
-        await comment.save();
-
-        post.comments.push({
-            post_id: comment._id
-        })
-
-        res.status(200).send("Comment created successfully");
+        newComment = new Comment(newComment)
+        await newComment.save();
+        post.comments.push(newComment._id);
+        Post.updateOne({ _id: postId }, { $push: { comments: { _id: newComment._id } } }).exec()        
+        return res.status(200).send("Post added successfully");
     }
 
-    res.status(400).send("There was an error adding comment");
+    return res.status(400).send("There was an error adding comment");
 
 })
 
+/* This is a function that is used to like a post.*/
 const likePost = asyncHandler( async(req,res)=>{
     const user = await User.findById(req.user._id).select('_id');
     const postId = req.params.id;
 
-    const post = await Post.findById(postId); 
-    const { likes } = await Post.findOne({ _id: postId }).select("likes");
-   
-    if(post){
-        const alreadyLiked = likes.find((item) => {
-            return item._id === user._id;
-        });
+    if (!user) return res.status(404).send("Invalid Request");
 
-        if(alreadyLiked){
-            Post.updateOne({ _id: postId }, { $pull: { likes: user._id } }).exec();
-            return res.status(200).send(true);
-        }
-        Post.updateOne({ _id: postId }, { $push: { likes: user._id } }).exec();
-        res.status(200).send(false);
-    }
+    let post = await Post.findOne({
+        _id: postId,
+        likes: { _id: user._id },
+    }).select("_id");
+
+    if (post) return res.status(400).send("Already Liked");
+    
+    post = await Post.findByIdAndUpdate(
+        { _id: postId },
+        { $push: { likes: { _id: user._id } } },
+        { new: true }
+    )
+
+    res.status(200).send({ likes: post.likes.length });
 
 })
 
-export {createPost, createComment,likePost};
+const dislikePost = asyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user._id).select('_id');
+    const postId = req.params.id;
+    const post = await Post.findById(postId);
+
+    const alreadyLiked = post.likes.find((item) => {
+            return item._id.toString() === user._id.toString();
+    });
+
+    if (alreadyLiked) {
+        const post = await Post.findByIdAndUpdate(
+          { _id: postId },
+          { $pull: { likes: { _id: user._id } } },
+          { new: true }
+        )
+
+        res.status(200).send({ likes: post.likes.length });
+        
+    }
+})
+
+export {createPost, createComment,likePost, dislikePost};
