@@ -34,8 +34,7 @@ const createPost = asyncHandler(async (req,res) =>{
             ...post,
             image: { data, contentType: mimetype },
             hasImage: true,
-        };
-       
+        };  
     }
 
     post = new Post(post);
@@ -60,14 +59,14 @@ const createPost = asyncHandler(async (req,res) =>{
 
 /* This code is adding a comment to a post. */
 const createComment = asyncHandler(async(req,res)=> {
-    const user = await User.findById(req.user._id).select('_id firstName lastName');
+    const user = await User.findById(req.user._id)
+    .select('_id firstName lastName');
+    
     const postId = req.params.id;
-
     const { comment }  = req.body;
 
     const post = await Post.findById(postId)
   
-
     if(post){
         let newComment = {
             author_id: user._id,
@@ -142,11 +141,11 @@ const editPost = asyncHandler(async(req,res)=>{
     const {title, description} = req.body;
 
     if(post){
-        const isAllowed = () => {
+        const isAuthorized = () => {
             return post.author_id === user._id
         }
 
-        if(isAllowed){
+        if(isAuthorized){
             await Post.findOneAndUpdate(
                 { _id: postId },
                 { title: title },
@@ -165,9 +164,14 @@ const deletePost = asyncHandler(async(req,res)=>{
     const post = await Post.findById(postId);
 
     if(post){
-        await Post.deleteOne(postId);
-        await Comment.deleteMany({post_id: postId});
-        return res.status(200).send('Post deleted successfully')
+        const isAuthorized = () => {
+            return post.author_id === user._id
+        }
+        if(isAuthorized){
+            await Post.deleteOne(postId);
+            await Comment.deleteMany({post_id: postId});
+            return res.status(200).send('Post deleted successfully')
+        }
     }
     return res.status(400).send("Invalid Operation");
 
@@ -182,12 +186,12 @@ const editComment = asyncHandler(async(req,res)=>{
     const comment = await Comment.findById(commentId);
 
     if(post && comment){
-        const isAllowed = () => {
+        const isAuthorized = () => {
             return comment.author_id === user._id
         }
-        if(isAllowed){
+        if(isAuthorized){
             await Comment.findOneAndUpdate(
-                { post_id: commentId},
+                { _id: commentId},
                 {comment: req.body.comment}
             )
             res.status(200).send(comment);
@@ -203,29 +207,69 @@ const deleteComment = asyncHandler(async(req,res)=>{
     const postId = req.params.id;
     const commentId  = req.params.comment_id;
     const user = await User.findById(req.user._id);
+    const userComment = await Comment.findById(postId);
 
-    let comment = await Comment.findOneAndDelete({
-        _id: commentId,
-        post_id: postId,
-        author_id: user._id
-    })
+    const isAuthorized = () => {
+        return userComment.author_id === user._id;
+    }
 
-    await Post.findByIdAndUpdate(
-        { _id: postId },
-        {
-           $pull: { comments: comment_id },
-        },
-        { new: true }
-    );
-    res.status(200).send({
-        _id: comment._id,
-    });
-})
-
-const queryAllPosts = asyncHandler(async(req,res)=>{
+    if(isAuthorized){
+        let comment = await Comment.findOneAndDelete({
+            _id: commentId,
+            post_id: postId,
+            author_id: user._id
+        })
     
+        await Post.findByIdAndUpdate(
+            { _id: postId },
+            {
+               $pull: { comments: commentId },
+            },
+            { new: true }
+        );
+        res.status(200).send({
+            _id: comment._id,
+        });
+    }
+    
+    res.status(400).send('Not authorized to delete comment')
+
 })
 
+/* This is a function that is used to get all the posts. */
+const queryAllPosts = asyncHandler(async(req,res)=>{
+    await Post.find()
+    .sort({ date: -1 })
+    .populate("author_id", "_id firstName lastName profilePicture")
+    .populate("likes", "_id firstName lastName")
+    .populate('comments._id', "_id author_name comment")
+    .exec()
+    .then(posts => {
+        res.json({ posts })
+    })
+    .catch(err => console.log(err));
+})
+
+
+/* This is a function that is used to get all the comments for a post. */
+const postComments = asyncHandler(async(req,res)=>{
+    const postId = req.params.id;
+    await Post.findById(postId, 'comments')
+        .populate('comments._id', 'author_id author_name comment')
+        .populate('author_id', 'profilePicture')
+        .exec()
+        .then((comments)=> {
+            if(comments){
+                res.json({comments})
+            }
+            else{
+                res.status(422).json({ error: "No comments" });
+            }
+        })
+        .catch(err => console.log(err))
+})
+
+/* This is a function that is used to get a single post. */
 const querySinglePost = asyncHandler(async(req,res)=>{
     const postId = req.params.id;
     const post = await Post.findById(postId).select({
@@ -236,10 +280,9 @@ const querySinglePost = asyncHandler(async(req,res)=>{
         groupId: 1,
         author_id: 1
     })
-    if (!post) return res.sendStatus(404);
+    if (!post) return res.status(404).send('Could not find post');
     res.status(200).send(post);
 })
-
 
 
 export {
@@ -251,5 +294,7 @@ export {
     deleteComment,
     editPost,
     querySinglePost,
-    editComment
+    editComment,
+    postComments,
+    queryAllPosts
 };

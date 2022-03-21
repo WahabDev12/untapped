@@ -79,6 +79,7 @@ const createPostByGroupId = asyncHandler(async(req,res)=>{
     
 })
 
+/* This is a middleware function that is used to join a group. */
 const joinGroup = asyncHandler( async(req,res)=>{
     const user = await User.findById(req.user._id);
     const groupId = req.params.id;
@@ -147,13 +148,47 @@ const deleteGroup = asyncHandler(async(req,res)=>{
     res.status(200).send("Group deleted successfully");
 })
 
+/* This is a middleware function that is used to query the posts of a group. */
 const queryGroupPosts = asyncHandler(async(req,res)=>{
     const groupId = req.params.id;
+    try{
+        const groupPosts = await Post.findById({group_Id: groupId}).populate('posts')
+        res.status(200).send(groupPosts);
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).send(error);
+    }
          
 })
 
+/* This is a middleware function that is used to delete a group. */
 const userLeaveGroup = asyncHandler(async(req,res)=>{
+    const groupId = req.params.id;
+    const user = await User.findById(req.user._id);
+    await Group.findByIdAndUpdate(
+        {_id: groupId},
+        {
+            $pull: {
+              members: { _id: user._id, isAdmin: false }
+            }
 
+        }
+
+    )
+    res.status(200).send('You have left the group')
+})
+
+/* This is a middleware function that is used to query the members of a group. */
+const groupMembers = asyncHandler(async(req,res)=>{
+    const groupId = req.params.id;
+    try{
+        const members = await Group.findById(groupId).populate('members');
+        res.status(200).send(members)
+    }
+    catch(error){
+        res.status(404).send(error)
+    }
 })
 
 export {
@@ -161,5 +196,8 @@ export {
     createPostByGroupId, 
     joinGroup,
     deleteGroup, 
-    editGroupDetails
+    editGroupDetails,
+    queryGroupPosts,
+    userLeaveGroup,
+    groupMembers
 };

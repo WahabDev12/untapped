@@ -5,10 +5,10 @@ const commentSchema = mongoose.Schema(
 
     {
           author_id: {
-              type: mongoose.Types.ObjectId,
-              ref: "User",
-              required: true,
-          },
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
           author_name:{
             type:String,
             required:true
