@@ -44,13 +44,12 @@ const admin = (req, res, next) => {
 
 const groupAdmin = async (req,res,next) => {
     try{
-
       const group_id = req.params.id;
       const user = req.user;
       const group = await Group.findById(group_id).
       populate('group_admin_id', '_id firstName lastName')
 
-      if(group.group_admin_id._id === user._id){
+      if(group.group_admin_id === user._id){
           req.group = group
           return next()
       }

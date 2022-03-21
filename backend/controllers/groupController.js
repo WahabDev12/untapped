@@ -123,9 +123,43 @@ const joinGroup = asyncHandler( async(req,res)=>{
     
         res.send(group.members)
     }
-
-
-    
 })
 
-export {createGroup, createPostByGroupId, joinGroup};
+/* A middleware function that is used to edit the group details. */
+const editGroupDetails = asyncHandler(async(req,res)=>{
+    const user  = await User.findById(req.user._id);
+    const groupId = req.params.id;
+    const group = await Group.findById(groupId).select('_id');
+
+    group.name = req.body.name;
+    group.description = req.body.description;
+    group.group_privacy = req.body.group_privacy;
+
+    await group.save();
+    res.status(200).send("Group details updated successfully");
+
+})
+
+/* This is a middleware function that is used to delete a group. */
+const deleteGroup = asyncHandler(async(req,res)=>{
+    const groupId  = req.params.id;
+    await Group.findByIdAndRemove({ _id: groupId });
+    res.status(200).send("Group deleted successfully");
+})
+
+const queryGroupPosts = asyncHandler(async(req,res)=>{
+    const groupId = req.params.id;
+         
+})
+
+const userLeaveGroup = asyncHandler(async(req,res)=>{
+
+})
+
+export {
+    createGroup, 
+    createPostByGroupId, 
+    joinGroup,
+    deleteGroup, 
+    editGroupDetails
+};

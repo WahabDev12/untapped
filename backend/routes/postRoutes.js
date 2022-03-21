@@ -6,7 +6,7 @@ import { createComment, createPost, dislikePost, likePost } from '../controllers
 import { protect } from '../middleware/authMiddleware.js';
 
 router.post('/create',protect, createPost);
-router.post('/create/comment/:id', protect, createComment)
+router.put('/create/comment/:id', protect, createComment)
 router.post('/like/:id', protect, likePost)
 router.post('/dislike/:id', protect, dislikePost)
 
