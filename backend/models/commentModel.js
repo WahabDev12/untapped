@@ -13,6 +13,12 @@ const commentSchema = mongoose.Schema(
             type:String,
             required:true
           },
+
+          author_profile:{
+            type:String,
+            ref:"User"
+          },
+
           comment: {
             type: String,
             required: true,

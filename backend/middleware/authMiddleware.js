@@ -49,7 +49,7 @@ const groupAdmin = async (req,res,next) => {
       const group = await Group.findById(group_id).
       populate('group_admin_id', '_id firstName lastName')
 
-      if(group.group_admin_id === user._id){
+      if(group.group_admin_id._id.toString() === user._id.toString()){
           req.group = group
           return next()
       }
@@ -57,7 +57,6 @@ const groupAdmin = async (req,res,next) => {
 
     }
     catch(error){
-        console.log(error);
         res.status(400).send(error.message);
     }
 }

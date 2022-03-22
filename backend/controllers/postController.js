@@ -60,8 +60,8 @@ const createPost = asyncHandler(async (req,res) =>{
 /* This code is adding a comment to a post. */
 const createComment = asyncHandler(async(req,res)=> {
     const user = await User.findById(req.user._id)
-    .select('_id firstName lastName');
-    
+    .select('_id firstName lastName profilePicture');
+
     const postId = req.params.id;
     const { comment }  = req.body;
 
@@ -71,6 +71,7 @@ const createComment = asyncHandler(async(req,res)=> {
         let newComment = {
             author_id: user._id,
             author_name: `${user.firstName} ${user.lastName}`,
+            author_profile: user.profilePicture,
             comment,
             post_id: postId
         }
@@ -81,7 +82,7 @@ const createComment = asyncHandler(async(req,res)=> {
         Post.updateOne(
             { _id: postId },
             { $push: { comments: { _id: newComment._id } } }).exec()        
-        return res.status(200).send("Post added successfully");
+        return res.status(200).send("Comment added successfully");
     }
 
     return res.status(400).send("There was an error adding comment");
@@ -142,16 +143,19 @@ const editPost = asyncHandler(async(req,res)=>{
 
     if(post){
         const isAuthorized = () => {
-            return post.author_id === user._id
+            return post.author_id._id.toString() === user._id.toString()
         }
 
-        if(isAuthorized){
+        if(isAuthorized()){
             await Post.findOneAndUpdate(
                 { _id: postId },
-                { title: title },
-                { description: description }
+                { 
+                    title: title,
+                    description: description
+                }
             )
-            res.status(200).send(post);
+            const updatedPost = await Post.findById(postId);
+            return res.status(200).send(updatedPost);
         }
         res.status(400).send("Not authorized to edit")
     }
@@ -162,16 +166,18 @@ const editPost = asyncHandler(async(req,res)=>{
 const deletePost = asyncHandler(async(req,res)=>{
     const postId = req.params.id;
     const post = await Post.findById(postId);
+    const user = await User.findById(req.user._id)
 
     if(post){
         const isAuthorized = () => {
-            return post.author_id === user._id
+            return post.author_id._id.toString() === user._id.toString();
         }
-        if(isAuthorized){
-            await Post.deleteOne(postId);
+        if(isAuthorized()){
+            await Post.deleteOne({ _id: postId});
             await Comment.deleteMany({post_id: postId});
             return res.status(200).send('Post deleted successfully')
         }
+        return res.status(400).send("You cant delete this post"); 
     }
     return res.status(400).send("Invalid Operation");
 
@@ -187,14 +193,16 @@ const editComment = asyncHandler(async(req,res)=>{
 
     if(post && comment){
         const isAuthorized = () => {
-            return comment.author_id === user._id
+            return comment.author_id._id.toString() === user._id.toString()
         }
-        if(isAuthorized){
+        if(isAuthorized()){
             await Comment.findOneAndUpdate(
-                { _id: commentId},
-                {comment: req.body.comment}
+                { _id: commentId },
+                { comment: req.body.comment }
             )
-            res.status(200).send(comment);
+            const updatedComment = await Comment.findById(commentId)
+            .populate('author_id', 'profilePicture')
+            res.status(200).send(updatedComment);
         }
         res.status(400).send("Not authorized to edit")
     }
@@ -207,14 +215,14 @@ const deleteComment = asyncHandler(async(req,res)=>{
     const postId = req.params.id;
     const commentId  = req.params.comment_id;
     const user = await User.findById(req.user._id);
-    const userComment = await Comment.findById(postId);
+    const userComment = await Comment.findById(commentId);
 
     const isAuthorized = () => {
-        return userComment.author_id === user._id;
+        return userComment.author_id._id.toString() === user._id.toString();
     }
 
-    if(isAuthorized){
-        let comment = await Comment.findOneAndDelete({
+    if(isAuthorized()){
+        await Comment.findOneAndDelete({
             _id: commentId,
             post_id: postId,
             author_id: user._id
@@ -223,13 +231,11 @@ const deleteComment = asyncHandler(async(req,res)=>{
         await Post.findByIdAndUpdate(
             { _id: postId },
             {
-               $pull: { comments: commentId },
+               $pull: { comments: { _id: commentId } },
             },
             { new: true }
         );
-        res.status(200).send({
-            _id: comment._id,
-        });
+        res.status(200).send('Comment deleted successfully');
     }
     
     res.status(400).send('Not authorized to delete comment')
@@ -240,9 +246,8 @@ const deleteComment = asyncHandler(async(req,res)=>{
 const queryAllPosts = asyncHandler(async(req,res)=>{
     await Post.find()
     .sort({ date: -1 })
-    .populate("author_id", "_id firstName lastName profilePicture")
-    .populate("likes", "_id firstName lastName")
-    .populate('comments._id', "_id author_name comment")
+    .populate("likes", "_id")
+    .populate('comments._id', "_id author_name author_id comment")
     .exec()
     .then(posts => {
         res.json({ posts })
@@ -255,8 +260,7 @@ const queryAllPosts = asyncHandler(async(req,res)=>{
 const postComments = asyncHandler(async(req,res)=>{
     const postId = req.params.id;
     await Post.findById(postId, 'comments')
-        .populate('comments._id', 'author_id author_name comment')
-        .populate('author_id', 'profilePicture')
+        .populate('comments._id', 'author_id author_name author_profile comment')
         .exec()
         .then((comments)=> {
             if(comments){
@@ -277,8 +281,11 @@ const querySinglePost = asyncHandler(async(req,res)=>{
         title: 1,
         description: 1,
         image: 1,
-        groupId: 1,
-        author_id: 1
+        group_Id: 1,
+        group: 1,
+        author_id: 1,
+        likes: 1,
+        comments:1
     })
     if (!post) return res.status(404).send('Could not find post');
     res.status(200).send(post);
