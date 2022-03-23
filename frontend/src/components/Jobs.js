@@ -8,7 +8,7 @@ import Container from "./Container";
 const Jobs = () => {
     return ( 
         <>
-        <Sidebar jobs={'active'} />
+        <Sidebar />
         <HideScroll>
         <SectionStyled>
         

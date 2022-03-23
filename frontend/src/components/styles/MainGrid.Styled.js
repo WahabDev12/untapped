@@ -8,6 +8,7 @@ export const MainGridStyled = styled.section`
   height: 100%;
   padding: 20px 25px;
   transition: 400ms margin-left;
+  font-size:14px;
 
   @media (max-width: 950px) {
     margin-left: 75px;

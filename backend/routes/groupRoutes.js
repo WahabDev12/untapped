@@ -5,7 +5,10 @@ import {
     createPostByGroupId, 
     joinGroup,
     deleteGroup,
-    queryGroupPosts
+    queryGroupPosts,
+    queryAllGroups,
+    groupMembers,
+    userLeaveGroup
     
 } from "../controllers/groupController.js";
 
@@ -18,7 +21,9 @@ router.post('/join/:id', protect, joinGroup)
 router.patch('/edit/:id', protect, groupAdmin, editGroupDetails)
 router.delete('/delete/:id', protect, groupAdmin, deleteGroup)
 router.get('/posts/:id', protect, queryGroupPosts)
-
+router.get('/all', protect, queryAllGroups)
+router.get('/members/:id', protect, groupMembers)
+router.put('/leave/:id', protect, userLeaveGroup)
 
 export default router;
 

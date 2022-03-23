@@ -152,7 +152,9 @@ const deleteGroup = asyncHandler(async(req,res)=>{
 const queryGroupPosts = asyncHandler(async(req,res)=>{
     const groupId = req.params.id;
     try{
-        const groupPosts = await Post.findById({group_Id: groupId}).select('posts')
+        const groupPosts = await Post.find({group_Id: groupId})
+        .sort({ date: -1})
+        .select("-date")
         res.status(200).send(groupPosts);
     }
     catch(error){
@@ -182,7 +184,7 @@ const userLeaveGroup = asyncHandler(async(req,res)=>{
 const groupMembers = asyncHandler(async(req,res)=>{
     const groupId = req.params.id;
     try{
-        const members = await Group.findById(groupId).populate('members');
+        const members = await Group.findById(groupId).select('members');
         res.status(200).send(members)
     }
     catch(error){
@@ -193,7 +195,7 @@ const groupMembers = asyncHandler(async(req,res)=>{
 
 const queryAllGroups = asyncHandler(async(req,res)=>{
     await Group.find()
-    .select('name description group_privacy members')
+    .select('name description group_privacy')
     .exec()
     .then(groups => {
         res.json({groups})

@@ -10,6 +10,7 @@ import Communities from './components/Communities';
 import Events from './components/Events';
 import Companies from './components/Companies';
 import Profile from './components/Profile';
+import Candidate from './components/Candidate';
 
 const App = () => {
 
@@ -31,9 +32,7 @@ const App = () => {
                   <Route path="/app/events" element={<Events />} />
                   <Route path="/app/companies" element={<Companies />} />
                   <Route path="/app/profile" element={<Profile />} />
-                  
-                  {/* <Route path="/jobs" render={() => (<State component={'jobs'}/>)} /> */}
-                  {/* <Route path="/candidates" render={() => (<State component={'candidates'}/>)} /> */}
+                  <Route path="/app/candidates" element={<Candidate />} />
 
               </Routes>
 
