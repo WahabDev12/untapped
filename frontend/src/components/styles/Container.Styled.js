@@ -15,7 +15,7 @@ export const ContainerStyled = styled.div`
     overflow-y: hidden;
 
     
-    .job-container{
+    .item-container{
         display:grid;
         grid-gap: 0.9375rem;
         grid-template: auto/repeat(3, 1fr);
@@ -46,6 +46,68 @@ export const ContainerStyled = styled.div`
         margin-top:1rem;
         width:6.5rem;
         height:6.5rem;
+    }
+
+    .wrapper{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.625rem;
+        margin-top:0.2rem;
+    }
+
+    .username{
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.375rem;
+        font-weight: 500;
+    }   
+
+    .school{
+        line-height: 1rem;
+        font-weight: 400;
+        font-size: .875rem;
+        margin-top:0.5rem;
+        text-align: center;
+    }
+
+    .major{
+        font-size: .775rem;
+        text-align: center;
+        margin-top:0.5rem;
+    }
+
+    .follow-wrapper{
+        margin-top:2.5rem;
+        border-top: 1px solid #dadada;
+        padding-top:0.75rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .follow-wrapper > button{
+        background-color: #c9f270;
+        max-height: 3rem;
+        padding: 0 1rem;
+        color: #0e0e0e;
+        width:100%;
+        padding:10px;
+        padding-left:15px;
+        padding-right:15px;
+        cursor: pointer;
+        outline:none;
+        border:1px solid #c9f270;
+        border-radius:5px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .user-profile{
+        width: 3.6875rem;
+        height: 3.6875rem;
+        font-size: 1.875rem;
+        display: flex;
+        justify-content: center;
     }
 
     .company-name{

@@ -5,7 +5,7 @@ const Container = () => {
     return (  
          <ContainerStyled>
                 <p className="alert">NEW JOBS ON SHITAPP</p>
-                <div className="job-container">
+                <div className="item-container">
                     
                 <div className="job">
                     <p className="applicant-count"> <ion-icon name="people-outline"></ion-icon> 25 applicants</p>   

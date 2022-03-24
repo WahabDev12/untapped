@@ -23,14 +23,7 @@ const OneTab = () => {
             <span>Jobs</span>
           </OneTabStyled>
         </a>
-        <a href="/app/events">
-          <OneTabStyled>
-            <div className="icon">
-              <ion-icon name="calendar-number-outline"></ion-icon>
-          </div>
-            <span>Events</span>
-          </OneTabStyled>
-        </a>
+     
 
         <a href="/app/candidates">
           <OneTabStyled>
@@ -38,6 +31,15 @@ const OneTab = () => {
               <ion-icon name="people-outline"></ion-icon>
           </div>
             <span>Candidates</span>
+          </OneTabStyled>
+        </a>
+
+        <a href="/app/assessment">
+          <OneTabStyled>
+            <div className="icon">
+              <ion-icon name="school-outline"></ion-icon>
+            </div>
+            <span>Asssessments</span>
           </OneTabStyled>
         </a>
 

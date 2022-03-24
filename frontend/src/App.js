@@ -4,10 +4,9 @@ import { ThemeProvider } from 'styled-components';
 import Home from './components/Home';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import LandingPage from './components/landingPage';
-import State from './components/State';
 import Jobs from './components/Jobs';
 import Communities from './components/Communities';
-import Events from './components/Events';
+import Assessment from './components/Assessment';
 import Companies from './components/Companies';
 import Profile from './components/Profile';
 import Candidate from './components/Candidate';
@@ -29,7 +28,7 @@ const App = () => {
                   <Route path="/app/home" element={<Home />} />
                   <Route path="/app/jobs" element={<Jobs />} />
                   <Route path="/app/communities" element={<Communities />} />
-                  <Route path="/app/events" element={<Events />} />
+                  <Route path="/app/assessment" element={<Assessment />} />
                   <Route path="/app/companies" element={<Companies />} />
                   <Route path="/app/profile" element={<Profile />} />
                   <Route path="/app/candidates" element={<Candidate />} />

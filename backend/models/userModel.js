@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
     },
     profilePicture:{
         type: String,
-        default:"./images/default-pic.png"
+        default:"https://img.icons8.com/external-anggara-blue-anggara-putra/95/000000/external-avatar-interface-anggara-blue-anggara-putra.png"
     },
     isAdmin: {
       type: Boolean,
