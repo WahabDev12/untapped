@@ -10,6 +10,7 @@ import Assessment from './components/Assessment';
 import Companies from './components/Companies';
 import Profile from './components/Profile';
 import Candidate from './components/Candidate';
+import Group from './components/GroupTemplate';
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
                   <Route path="/app/companies" element={<Companies />} />
                   <Route path="/app/profile" element={<Profile />} />
                   <Route path="/app/candidates" element={<Candidate />} />
+                  <Route path="/app/software-engineering" element={<Group />} />
 
               </Routes>
 

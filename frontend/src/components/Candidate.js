@@ -6,7 +6,6 @@ import { ContainerStyled } from "./styles/Container.Styled";
 const Candidate = () => {
     return ( 
         <>
-        <Sidebar />
         
         <Sidebar />
         <HideScroll>
@@ -27,7 +26,7 @@ const Candidate = () => {
         <ContainerStyled>
 
         <p className="alert">CANDIDATES YOU MAY KNOW</p>
-        {/* Input candidates profiles here */}
+        {/* Input candidates profiles here */}      
 
         <div className="item-container">
             <div className="job">

@@ -69,14 +69,14 @@ const OneTab = () => {
               </div>
           </OneTabStyled>
         </a>
-
+        <a href="/app/general-advice">
         <OneTabStyled>
           <div className="icon">
               <h6>💡</h6>
         </div>
           <span>General Advice</span>
         </OneTabStyled>
-
+        </a>
 
         <OneTabStyled>
           <div className="icon">
@@ -85,12 +85,14 @@ const OneTab = () => {
           <span>Opportunities Hub</span>
         </OneTabStyled>
 
-        <OneTabStyled>
-          <div className="icon">
-              <h6>💻</h6>
-        </div>
-          <span>Software Engineering</span>
-        </OneTabStyled>
+        <a href="/app/software-engineering">
+          <OneTabStyled>
+            <div className="icon">
+                <h6>💻</h6>
+          </div>
+            <span>Software Engineering</span>
+          </OneTabStyled>
+        </a>
 
         <OneTabStyled>
           <div className="icon">

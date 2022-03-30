@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MainGridStyled = styled.section`
 
-  margin-top:30px;
   margin-left: 300px;
   box-sizing: border-box;
   height: 100%;

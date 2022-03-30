@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Karla&display=swap');
 
-*{
+  *{
       font-family: 'Inter',sans-serif;
   }
 
@@ -70,7 +70,7 @@
     margin-top:10px;
     margin-bottom:10px;
     background-color: #f2f2f2;
-}
+  }
 
   .online-members{
       display: flex;
@@ -189,169 +189,169 @@
     color:#666;
     font-weight: 400;
     line-height: 130%;
-}
-
-.trend-title-and-caption{
-  display: block;
-  align-items: center;
-  margin-left:0.5em;
-  margin-top:0.8em;
-}
-
-.trend-title{
-  color:#0e0e0e;
-  font-weight:500;
-  line-height: 130%;
-  font-size:0.875rem;
-  display:flex;
-  flex-wrap:wrap;
-  max-width:100%;
-  max-height:100%;
-  margin-bottom:1rem;
-
-}
-
-.trend-reactions-tab{
-  display: flex;
-  align-items: center;
-  margin-bottom:5px;
-}
-
-.trend-reactions-tab > button{
-   margin: 0px 7px 7px 3px;
-   max-width: 100%;
-   padding:4px;
-   outline: none;
-   border: none;
-   color:#666;
-   background-color: #fff;
-}
-
-/* END OF TRENDING BAR */
-
-
-/* COMMUNITIES*/
-
-  .comm-name{
-     font-size: 1rem;
-     font-weight:500;
-     line-height: 130%;
-     color:#0e0e0e;
   }
 
-  .name-div{
-    margin-left:5px;
-    padding:10px;
-  }
-
-  .comm-box{
-    display:flex;
-    align-items: center;
-    padding:1px;
-    margin-top:10px;
-  }
-
-
-  .create-comm{
-    margin-top:10px;
-    color: rgb(51, 101, 230);
-    font-size: 0.945rem;
-    font-weight:600;
-    line-height: 130%;
-
-  }
-
-  /* END OF COMMUNITIES SECTION*/
-
-  .online-status{
-    height: 6px;
-    width: 6px;
-    background-color: #4bcdbc;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 0.5rem 0.125rem 0;
-  }
-
-  /* TITLE AND CAPTION*/
-
-  .title-and-caption{
+  .trend-title-and-caption{
     display: block;
     align-items: center;
-    margin-left:3.5em;
+    margin-left:0.5em;
     margin-top:0.8em;
   }
 
-  .title{
+  .trend-title{
     color:#0e0e0e;
-    font-weight:600;
+    font-weight:500;
     line-height: 130%;
-    font-size:1.05rem;
+    font-size:0.875rem;
     display:flex;
     flex-wrap:wrap;
-    margin-bottom:0.25rem;
     max-width:100%;
     max-height:100%;
+    margin-bottom:1rem;
 
   }
 
-  .caption{
-    display:block;
-    line-height:1.6;
-    font-weight:400;
-    font-size:0.9rem;
-    max-width:fit-content;
-    word-break: break-word;
-    max-height:100%;
-    margin-bottom:1.2em;
+  .trend-reactions-tab{
+    display: flex;
+    align-items: center;
+    margin-bottom:5px;
   }
 
-  /* REACTIONS TAB*/
-  .reactions-tab{
-    display: grid; 
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 7px;
-    height: 100%;
- }
-
- .reactions-tab > button{
-    outline:none;
-    width:110px;
-    max-width:100%;
-    padding:8px;
-    border:1px solid #a6a6a6;
-    border-radius:100px;  
-    font-family:'Inter',sans-serif ;
-    cursor: pointer;
-    background-color:#fff;
-    font-weight:400;
+  .trend-reactions-tab > button{
+    margin: 0px 7px 7px 3px;
+    max-width: 100%;
+    padding:4px;
+    outline: none;
+    border: none;
     color:#666;
- }
+    background-color: #fff;
+  }
 
- .comment-btn{
-    width:120px;
- }
-
- /* MODAL BUTTON */
-
- .btn{
-   text-decoration: none;
- }
+  /* END OF TRENDING BAR */
 
 
-  .btn-close {
-    color: #aaaaaa;
-    font-size: 30px;
+  /* COMMUNITIES*/
+
+    .comm-name{
+      font-size: 1rem;
+      font-weight:500;
+      line-height: 130%;
+      color:#0e0e0e;
+    }
+
+    .name-div{
+      margin-left:5px;
+      padding:10px;
+    }
+
+    .comm-box{
+      display:flex;
+      align-items: center;
+      padding:1px;
+      margin-top:10px;
+    }
+
+
+    .create-comm{
+      margin-top:10px;
+      color: rgb(51, 101, 230);
+      font-size: 0.945rem;
+      font-weight:600;
+      line-height: 130%;
+
+    }
+
+    /* END OF COMMUNITIES SECTION*/
+
+    .online-status{
+      height: 6px;
+      width: 6px;
+      background-color: #4bcdbc;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 0.5rem 0.125rem 0;
+    }
+
+    /* TITLE AND CAPTION*/
+
+    .title-and-caption{
+      display: block;
+      align-items: center;
+      margin-left:3.5em;
+      margin-top:0.8em;
+    }
+
+    .title{
+      color:#0e0e0e;
+      font-weight:600;
+      line-height: 130%;
+      font-size:1.05rem;
+      display:flex;
+      flex-wrap:wrap;
+      margin-bottom:0.25rem;
+      max-width:100%;
+      max-height:100%;
+
+    }
+
+    .caption{
+      display:block;
+      line-height:1.6;
+      font-weight:400;
+      font-size:0.9rem;
+      max-width:fit-content;
+      word-break: break-word;
+      max-height:100%;
+      margin-bottom:1.2em;
+    }
+
+    /* REACTIONS TAB*/
+    .reactions-tab{
+      display: grid; 
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 7px;
+      height: 100%;
+  }
+
+  .reactions-tab > button{
+      outline:none;
+      width:110px;
+      max-width:100%;
+      padding:8px;
+      border:1px solid #a6a6a6;
+      border-radius:100px;  
+      font-family:'Inter',sans-serif ;
+      cursor: pointer;
+      background-color:#fff;
+      font-weight:400;
+      color:#666;
+  }
+
+  .comment-btn{
+      width:120px;
+  }
+
+  /* MODAL BUTTON */
+
+  .btn{
     text-decoration: none;
-    position: absolute;
-    right: 5px;
-    top: 0;
   }
 
-  .btn-close:hover {
-  color: #919191;
-  }
-  
+
+    .btn-close {
+      color: #aaaaaa;
+      font-size: 30px;
+      text-decoration: none;
+      position: absolute;
+      right: 5px;
+      top: 0;
+    }
+
+    .btn-close:hover {
+    color: #919191;
+    }
+    
 
   /* RESPONSIVENESS*/
   @media (max-width: 950px) {

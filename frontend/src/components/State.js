@@ -8,7 +8,7 @@ const State = ({component}) => {
         switch(component){
             case 'home':
                 return <Home />
-            case 'jobs':
+            case 'jobs':6
                 return <Jobs />
             case 'communities':
                 return <Communities />
