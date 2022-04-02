@@ -11,6 +11,7 @@ import Companies from './components/Companies';
 import Profile from './components/Profile';
 import Candidate from './components/Candidate';
 import Group from './components/GroupTemplate';
+import CreateGroup from "./components/createGroup";
 
 const App = () => {
 
@@ -19,12 +20,12 @@ const App = () => {
   }
 
   return (    
-    <>
+    <>  
         <ThemeProvider theme = {theme}>
             <GlobalStyles />
             <Router>  
               <Routes>
-
+                  
                   <Route exact path="/" element={<LandingPage />} />
                   <Route path="/app/home" element={<Home />} />
                   <Route path="/app/jobs" element={<Jobs />} />
@@ -34,7 +35,7 @@ const App = () => {
                   <Route path="/app/profile" element={<Profile />} />
                   <Route path="/app/candidates" element={<Candidate />} />
                   <Route path="/app/software-engineering" element={<Group />} />
-
+                  <Route  path="/app/create-group" element={<CreateGroup />} />
               </Routes>
 
             </Router>

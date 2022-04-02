@@ -16,7 +16,7 @@ export const SidebarStyled = styled.section`
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
-}
+  }
 
   @media (max-width: 950px) {
     width: 75px;
