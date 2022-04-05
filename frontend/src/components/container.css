@@ -350,7 +350,22 @@
 
     .btn-close:hover {
     color: #919191;
-    }
+  }
+
+
+  /* GROUP CREATION*/
+
+  .main-div{
+    padding:20px;
+    box-sizing: border-box;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width:95%;
+    margin-top:3rem;
+    border:1px solid #666;
+}
     
 
   /* RESPONSIVENESS*/

@@ -25,6 +25,13 @@ const groupSchema = mongoose.Schema(
             enum: ["public", "private"],
             default: "public",
         },
+        theme_color: {
+          type: String,
+          required: true,
+          minlength: 3,
+          maxlength: 255,
+          default:'#AF2C2A'
+      },
         members: {
             type: [
               {

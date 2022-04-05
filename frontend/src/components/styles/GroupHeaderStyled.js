@@ -32,7 +32,7 @@ export const GroupHeaderStyled = styled.div`
     }
 
     .group-name{
-        color:#c27BF5;
+        color:${({ bg }) => bg || 'rgb(146,96,255)'};
         font-size: 1.5rem;
         font-weight: 400;
         line-height: 125%;
@@ -43,10 +43,6 @@ export const GroupHeaderStyled = styled.div`
     .members__privacy{
         font-size:13px;
         font-weight:400;
-    }
-
-    .banner-invite{
-        
     }
 
     .banner{
@@ -74,7 +70,7 @@ export const GroupHeaderStyled = styled.div`
     }
 
     .invite{
-        background-color: rgb(146, 96, 255);
+        background-color: ${({ bg }) => bg || 'rgb(146,96,255)'};
         color: white;
         border:none;
         outline:none;
