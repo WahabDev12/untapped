@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CreateGroupStyled = styled.div`
 
-    max-height: 100vh;
+    max-height: 100%;
     margin: auto 0;
     padding: 2.45rem;
     -webkit-box-flex: 1;
@@ -30,8 +30,7 @@ export const CreateGroupStyled = styled.div`
         box-sizing: border-box;
         box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
         border:none;
-        border-top-right-radius: 30px;
-        border-top-left-radius: 30px;
+        border-radius: 30px;
         display: block;
     }
 
@@ -49,6 +48,10 @@ export const CreateGroupStyled = styled.div`
         display: flex;
         justify-content: center;
         margin-bottom: 1rem;
+    }
+
+    .emoji{
+        font-size:3rem;
     }
     
     .group-info{
@@ -256,7 +259,7 @@ export const CreateGroupStyled = styled.div`
         width: 86%;
         border:2px solid rgb(0 0 0 / 5%);
     }
-    
+
     .color-input{
         -webkit-appearance: none;
         border: none;
@@ -312,6 +315,8 @@ export const CreateGroupStyled = styled.div`
         height: 17px;
         width: 17px;
         border-radius: 2px;
+        cursor: pointer;
+
     }
 
     .terms-text{
@@ -337,6 +342,7 @@ export const CreateGroupStyled = styled.div`
         font-weight: 600;
         border-radius: 4px;
         cursor:pointer;
+        margin-bottom:2rem;
     }
 
     .create-btn:hover{

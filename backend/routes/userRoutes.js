@@ -1,4 +1,5 @@
 import express from 'express'
+import Multer from 'multer'
 const router = express.Router()
 import {
   authUser,
@@ -9,11 +10,21 @@ import {
   deleteUser,
   getUserById,
   updateUser,
+  uploadProfile
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // no larger than 5mb
+  },
+});
+
+
 router.route('/signup').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
+router.post('/upload', multer.single("file"), uploadProfile, protect)
 router
   .route('/profile')
   .get( getUserProfile)

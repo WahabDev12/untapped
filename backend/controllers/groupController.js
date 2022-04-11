@@ -146,6 +146,7 @@ const deleteGroup = asyncHandler(async(req,res)=>{
     const groupId  = req.params.id;
     await Group.findByIdAndRemove({ _id: groupId });
     res.status(200).send("Group deleted successfully");
+    
 })
 
 /* This is a middleware function that is used to query the posts of a group. */

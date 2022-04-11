@@ -32,7 +32,7 @@ const GridContainer = () => {
             </div>
            
         </div>
-            <a className="create-comm" href="/app/communities">Create your own community</a>
+            <a className="create-comm" href="/app/create-group">Create your own community</a>
         </a>
             
         </div>

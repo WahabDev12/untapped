@@ -1,10 +1,55 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
+import { Storage } from '@google-cloud/storage'
+import path from "path"
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-// @desc    Auth user & get token
-// @route   POST /api/users/login
-// @access  Public
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+
+// Firebase init
+const storage = new Storage({
+      projectId: "user-uploads-v1",
+      keyFilename: path.join(__dirname, "../user-uploads-v1-5e802846fba2.json")
+});
+
+const bucket = storage.bucket("user-uploads-v1.appspot.com");
+
+// Upload image to storage function 
+const uploadImageToStorage = (file) => {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject("No image file");
+    }
+    let newFileName = `${file.originalname}_${Date.now()}`;
+
+    let fileUpload = bucket.file("profile-pics/" + newFileName);
+
+    const blobStream = fileUpload.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+      },
+    
+    });
+
+    blobStream.on("error", (error) => {
+      reject(error);
+    });
+
+    blobStream.on("finish", () => {
+      // The public URL can be used to directly access the file via HTTP.
+      const url = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
+      resolve(url);
+    });
+
+    blobStream.end(file.buffer);
+  });
+};
+
+
+// Login user
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
@@ -26,9 +71,7 @@ const authUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Register a new user
-// @route   POST /api/users/signup
-// @access  Public
+// register user
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body
 
@@ -61,9 +104,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
+// get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
@@ -81,9 +122,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
+//update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
 
@@ -111,17 +150,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Get all users
-// @route   GET /api/users
-// @access  Private/Admin
+
+// all users
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({})
   res.json(users)
 })
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
+// delete user
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
 
@@ -134,9 +170,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Get user by ID
-// @route   GET /api/users/:id
-// @access  Private/Admin
+// get user by ID
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select('-password')
 
@@ -148,9 +182,7 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
+// Update user
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
 
@@ -169,11 +201,40 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
     })
-  } else {
+  } 
+  else {
     res.status(404)
-    throw new Error('User not found')
+    throw new Error('User not found');
   }
 })
+
+// Upload profile photo
+const uploadProfile = asyncHandler(async(req,res)=> {
+  const file = req.file;
+  const user = await User.findById(req.params.id);
+  
+
+  if (file){
+    uploadImageToStorage(file)
+      .then((url) => {
+        return res.status(200).send({
+          image: url,
+        });
+      })
+      .catch((error) => {
+        return res.status(500).send({
+          error: error,
+        });
+      });
+  } 
+  else {
+    return res.status(422).send({
+      error: "File is required",
+    });
+  }
+})
+
+
 
 export {
   authUser,
@@ -184,4 +245,5 @@ export {
   deleteUser,
   getUserById,
   updateUser,
+  uploadProfile
 }
