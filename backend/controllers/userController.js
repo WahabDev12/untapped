@@ -1,53 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
-import { Storage } from '@google-cloud/storage'
-import path from "path"
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-
-
-// Firebase init
-const storage = new Storage({
-      projectId: "user-uploads-v1",
-      keyFilename: path.join(__dirname, "../user-uploads-v1-5e802846fba2.json")
-});
-
-const bucket = storage.bucket("user-uploads-v1.appspot.com");
-
-// Upload image to storage function 
-const uploadImageToStorage = (file) => {
-  return new Promise((resolve, reject) => {
-    if (!file) {
-      reject("No image file");
-    }
-    let newFileName = `${file.originalname}_${Date.now()}`;
-
-    let fileUpload = bucket.file("profile-pics/" + newFileName);
-
-    const blobStream = fileUpload.createWriteStream({
-      metadata: {
-        contentType: file.mimetype,
-      },
-    
-    });
-
-    blobStream.on("error", (error) => {
-      reject(error);
-    });
-
-    blobStream.on("finish", () => {
-      // The public URL can be used to directly access the file via HTTP.
-      const url = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
-      resolve(url);
-    });
-
-    blobStream.end(file.buffer);
-  });
-};
-
+import uploadImageToStorage from '../utils/fileUpload.js'
 
 // Login user
 const authUser = asyncHandler(async (req, res) => {
@@ -130,6 +84,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.firstName = req.body.firstName || user.firstName
     user.lastName = req.body.lastName || user.lastName
     user.email = req.body.email || user.email
+
     if (req.body.password){
       user.password = req.body.password``
     }
@@ -211,14 +166,21 @@ const updateUser = asyncHandler(async (req, res) => {
 // Upload profile photo
 const uploadProfile = asyncHandler(async(req,res)=> {
   const file = req.file;
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.user._id)
+  const folderPath = "profile-pics/";
   
+  if(!user) res.status(401).status("You are not authorized");
 
   if (file){
-    uploadImageToStorage(file)
+    uploadImageToStorage(file,folderPath)
       .then((url) => {
+        user.profilePicture = url
+
+        const updatedUser = user.save();
+
         return res.status(200).send({
-          image: url,
+          image: url      
+
         });
       })
       .catch((error) => {

@@ -2,12 +2,18 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import Group from '../models/groupModel.js';
 import Post from '../models/postsModel.js';
+import uploadImageToStorage from '../utils/fileUpload.js';
+
+// Folder path for group icon and cover photos
+const folderPathToAssets = "group-assets/";
+const folderPathToPosts = "group-posts/"
 
 /* Creating a new group and adding the admin to the members array. */
 const createGroup = asyncHandler(async (req,res)=> {
 
     const { name, description, group_privacy } = req.body;
     const user = await User.findById(req.user._id);
+    const icon = req.file;
 
     if(!user){
         res.status(400)
@@ -21,13 +27,28 @@ const createGroup = asyncHandler(async (req,res)=> {
         group_privacy
     })
 
+    if(icon){
+        uploadImageToStorage(icon,folderPathToAssets)
+        .then((url) => {
+          group.group_icon = url  
+         
+        })
+        .catch((error) => {
+        //   return res.status(500).send({
+        //     error: error
+        //   });
+            console.log(error.message)
+        });
+    }
+
+
     group.members.push({
         _id: user._id,
         name: `${user.firstName} ${user.lastName}`,
         isAdmin: true,
     });
     await group.save();
-    res.sendStatus(201);
+    res.status(201).send("Group created successfully");
 
 })
 
