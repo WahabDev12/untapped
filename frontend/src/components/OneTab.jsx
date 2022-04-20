@@ -1,6 +1,7 @@
 import { OneTabStyled } from "./styles/OneTab.Styled";
 import { Icon } from '@iconify/react';
 import "./topsection.css";
+import { SideInputStyled } from "./styles/SideInputStyled";
 
 
 const OneTab = () => {
@@ -22,14 +23,7 @@ const OneTab = () => {
             <span>Jobs</span>
           </OneTabStyled>
         </a>
-        <a href="/app/events">
-          <OneTabStyled>
-            <div className="icon">
-              <ion-icon name="calendar-number-outline"></ion-icon>
-          </div>
-            <span>Events</span>
-          </OneTabStyled>
-        </a>
+     
 
         <a href="/app/candidates">
           <OneTabStyled>
@@ -37,6 +31,15 @@ const OneTab = () => {
               <ion-icon name="people-outline"></ion-icon>
           </div>
             <span>Candidates</span>
+          </OneTabStyled>
+        </a>
+
+        <a href="/app/assessment">
+          <OneTabStyled>
+            <div className="icon">
+              <ion-icon name="school-outline"></ion-icon>
+            </div>
+            <span>Asssessments</span>
           </OneTabStyled>
         </a>
 
@@ -66,14 +69,14 @@ const OneTab = () => {
               </div>
           </OneTabStyled>
         </a>
-
+        <a href="/app/general-advice">
         <OneTabStyled>
           <div className="icon">
               <h6>💡</h6>
         </div>
           <span>General Advice</span>
         </OneTabStyled>
-
+        </a>
 
         <OneTabStyled>
           <div className="icon">
@@ -82,12 +85,14 @@ const OneTab = () => {
           <span>Opportunities Hub</span>
         </OneTabStyled>
 
-        <OneTabStyled>
-          <div className="icon">
-              <h6>💻</h6>
-        </div>
-          <span>Software Engineering</span>
-        </OneTabStyled>
+        <a href="/app/software-engineering">
+          <OneTabStyled>
+            <div className="icon">
+                <h6>💻</h6>
+          </div>
+            <span>Software Engineering</span>
+          </OneTabStyled>
+        </a>
 
         <OneTabStyled>
           <div className="icon">
@@ -95,16 +100,22 @@ const OneTab = () => {
         </div>
           <span>Entrepreneurship</span>
         </OneTabStyled>
-.
+
         <OneTabStyled>
             <div className="communities-tab">
                 <p>DIRECT MESSAGES</p>
             </div>
         </OneTabStyled>
+        <SideInputStyled>
 
-            <div className="search-tab">
-                 <input placeholder="Search..." type="search" className="search-communities" />
+            <div className="input-box">
+                    <Icon icon="akar-icons:search" height="18" inline={true} />
+            <div>
+              </div>
+              <input type="text" className="search-comm" placeholder="Search communities" />
             </div>
+
+        </SideInputStyled>
 
         <br></br>
 
@@ -126,7 +137,7 @@ const OneTab = () => {
              <div className="spacer"></div>
         
             <div className="version-div">
-                <small className="version">v.1.0.0</small>        
+                <small className="version">v1.0.0</small>        
             </div>
 
         </>

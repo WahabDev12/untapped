@@ -2,7 +2,7 @@ import { SidebarStyled } from './styles/Sidebar.Styled';
 import Header from './Header';
 import Tabs from './Tabs';
 
-const Sidebar = ({home,jobs,communities}) => {
+const Sidebar = () => {
     return (  
         <SidebarStyled>
              <Header />

@@ -41,10 +41,10 @@ export const ModalStyled = styled.section`
         -webkit-transform: translate(0, -500%);
         -ms-transform: translate(0, -500%);
         transform: translate(0, -500%);
-        -webkit-transition: -webkit-transform 0.3s ease-out;
-        -moz-transition: -moz-transform 0.3s ease-out;
-        -o-transition: -o-transform 0.3s ease-out;
-        transition: transform 0.3s ease-out;
+        -webkit-transition: -webkit-transform 0.4s ease-out;
+        -moz-transition: -moz-transform 0.4s ease-out;
+        -o-transition: -o-transform 0.4s ease-out;
+        transition: transform 0.4s ease-out;
         
     }
 
@@ -174,25 +174,24 @@ export const ModalStyled = styled.section`
         background-color:#fff;
    }
 
-  
- 
-
     @media (max-width: 950px) {
         .modal-dialog{
             width:30em;
             left:50%;
-        }
+    }
 
-        .btn-close{
-            top:0.5rem;
-            right:0.5rem;
-            width:1.5rem;
-            height:1.6rem;
-            font-size:21px;
-        }
-        .modal-dialog{
-            height:51%;
-        }
+    .btn-close{
+        top:0.5rem;
+        right:0.5rem;
+        width:1.5rem;
+        height:1.6rem;
+        font-size:21px;
+    }
+
+    .modal-dialog{
+        
+        height:51%;
+    }
 
     }
 

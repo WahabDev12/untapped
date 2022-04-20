@@ -13,14 +13,11 @@ const Home = () => {
              <h1 id="welcome-title">Welcome, Abdul-Wahab!</h1>
              <div className="online-members">
                  <small>5,603 members</small>
-                 
                  <small><span className="online-status"></span>2,603 online</small>
              </div>
              <ThreeCards />
              <TopSection />
             <GridContainer />
-            
-
          </MainGridStyled>
         </>
     );

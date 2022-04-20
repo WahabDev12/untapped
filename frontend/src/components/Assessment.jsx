@@ -1,14 +1,14 @@
 import Sidebar from "./Sidebar";
 import { MainGridStyled } from "./styles/MainGrid.Styled";
 
-const Events = () => {
+const Assessment = () => {
     return ( 
         <>
         <Sidebar />
         <MainGridStyled>
             <div className="events">
                 
-            <h3>This is the events tab</h3>    
+            <h3>This is the assessment tab</h3>    
             </div>
 
         </MainGridStyled>
@@ -16,4 +16,4 @@ const Events = () => {
      );
 }
  
-export default Events;
+export default Assessment;

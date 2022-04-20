@@ -21,6 +21,11 @@ export const ThreeCardsStyled = styled.div`
         cursor:pointer;
     }     
     
+    div:hover{
+        transform: translate(0,5%);
+        transition: transform 0.4s ease-out;
+    }
+
     div > img{
         max-width:80%;
         border-top-left-radius:16px;

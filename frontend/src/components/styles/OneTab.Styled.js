@@ -25,6 +25,7 @@ export const OneTabStyled = styled.div`
     span{
         padding: 0px 7px;
         font-family:"Inter",sans-serif ;
+        font-size: 14px;
     }
 
     .avatar{

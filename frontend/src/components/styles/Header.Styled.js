@@ -34,7 +34,7 @@ export const HeaderStyled = styled.header`
   
 
   @media (max-width: 950px) {
-      h1{
+      h2{
           display: none;
 
       }
