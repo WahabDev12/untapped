@@ -1,7 +1,7 @@
 import { HeaderStyled } from "./styles/Header.Styled";
 import "./container.css";
 
-const Header = ({home,jobs,events,candidates,companies}) => {
+const Header = () => {
     return ( 
         <>
         <HeaderStyled>

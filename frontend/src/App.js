@@ -12,6 +12,8 @@ import Profile from './components/Profile';
 import Candidate from './components/Candidate';
 import Group from './components/GroupTemplate';
 import CreateGroup from "./components/createGroup";
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 const App = () => {
 
@@ -36,6 +38,9 @@ const App = () => {
                   <Route path="/app/candidates" element={<Candidate />} />
                   <Route path="/app/software-engineering" element={<Group />} />
                   <Route  path="/app/create-group" element={<CreateGroup />} />
+                  <Route path="/app/login" element={<Login />} />
+                  <Route path="/app/signup" element={<SignUp />} />
+
               </Routes>
 
             </Router>

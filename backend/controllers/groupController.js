@@ -14,7 +14,7 @@ const createGroup = asyncHandler(async (req,res)=> {
     const { name, description, group_privacy } = req.body;
     const user = await User.findById(req.user._id);
     const icon = req.file;
-
+    const coverPhoto = req.file;    
     if(!user){
         res.status(400)
         throw new Error("User no found !!");
@@ -28,19 +28,34 @@ const createGroup = asyncHandler(async (req,res)=> {
     })
 
     if(icon){
-        uploadImageToStorage(icon,folderPathToAssets)
+        uploadImageToStorage(file,folderPathToAssets)
         .then((url) => {
-          group.group_icon = url  
+        //   group.group_icon = url  
+        group = {
+            ...group,
+            group_icon: url
+        }
          
         })
         .catch((error) => {
-        //   return res.status(500).send({
-        //     error: error
-        //   });
-            console.log(error.message)
+          return res.status(500).send({
+            error: error
+          });
         });
     }
 
+    // if(coverPhoto){
+    //     uploadImageToStorage(file,folderPathToAssets)
+    //     .then((url) => {
+    //       group.group_icon = url  
+         
+    //     })
+    //     .catch((error) => {
+    //       return res.status(500).send({
+    //         error: error
+    //       });
+    //     });
+    // }
 
     group.members.push({
         _id: user._id,
@@ -48,7 +63,14 @@ const createGroup = asyncHandler(async (req,res)=> {
         isAdmin: true,
     });
     await group.save();
-    res.status(201).send("Group created successfully");
+
+    res.send({
+        ...group._doc,
+        groupMembers: group.groupMembers.length,
+        posts: group.posts.length,
+    });
+
+    // res.status(201).send("Group created successfully");
 
 })
 
@@ -100,7 +122,6 @@ const createPostByGroupId = asyncHandler(async(req,res)=>{
     
 })
 
-/* This is a middleware function that is used to join a group. */
 const joinGroup = asyncHandler( async(req,res)=>{
     const user = await User.findById(req.user._id);
     const groupId = req.params.id;
