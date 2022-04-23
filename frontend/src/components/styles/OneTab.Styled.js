@@ -26,10 +26,13 @@ export const OneTabStyled = styled.div`
         padding: 0px 7px;
         font-family:"Inter",sans-serif ;
         font-size: 14px;
+        text-transform: capitalize;
     }
 
     .avatar{
         border-radius:100px;
+        width:40px;
+        height:40px;
     }
 
     .communities-tab{

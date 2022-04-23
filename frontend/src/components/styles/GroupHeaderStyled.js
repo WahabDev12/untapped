@@ -22,6 +22,10 @@ export const GroupHeaderStyled = styled.div`
         justify-content: center;
         margin-bottom: 1rem;
     }
+
+    .emoji{
+        font-size:3rem;
+    }
     
     .group-info{
         width:100%;

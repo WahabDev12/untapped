@@ -41,9 +41,6 @@ export const ModalStyled = styled.section`
         -webkit-transform: translate(0, -500%);
         -ms-transform: translate(0, -500%);
         transform: translate(0, -500%);
-        -webkit-transition: -webkit-transform 0.4s ease-out;
-        -moz-transition: -moz-transform 0.4s ease-out;
-        -o-transition: -o-transform 0.4s ease-out;
         transition: transform 0.4s ease-out;
         
     }
@@ -104,24 +101,29 @@ export const ModalStyled = styled.section`
    .user-post-name{
         outline:none;
         border:none;
-        width:170px;
         max-width: fit-content;
+        width:200px;
         border-radius: 5px;
         cursor: pointer;
         padding:10px 10px;
         height:19px;
-        font-size: 14px;
         display: flex;
+        align-items: center;
         background-color: #fefefe;
         border:1px solid #dadada;
    }
 
    .user-post-name > a{
        padding-left:2px;
+       cursor: pointer;
+       color:#666;
+       text-transform: capitalize;
    }
 
    .avatar{
        border-radius: 1000px;
+       width:35px;
+       height:35px;
    }
 
    .title{

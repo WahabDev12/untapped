@@ -1,19 +1,36 @@
 import "./container.css";
 import { Icon } from '@iconify/react';
 import Modal from "./Modal";
+import { MACHINE_LEARNING_COMM } from "./assets/images/imageUrl";
+import { useSelector } from "react-redux";
 
 const GridContainer = () => {
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    const postList = useSelector((state) => state.postList)
+    const { loading, error, posts } = postList
+
+    console.log(postList);
+
+
     return ( 
         <>
         <section id="grid-container">
         <div className="grid-item one">
             <div className="make-post">
                 <div>
-                    <img alt="avatar" className="avatar" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/40/000000/external-avatar-game-development-xnimrodx-lineal-color-xnimrodx-2.png"/>
+                    <img 
+                        alt="avatar" className="avatar"
+                        src={userInfo.profilePicture}
+                     />
                 </div>
                 <div className="name-and-input">
-                    <p>Abdul-Wahab Abass</p>    
-                    <a href="#modal-one" className="btn btn-big">Ask questions or share with the community....</a>
+                    <p className="user-name">{ userInfo.firstName} {userInfo.lastName}</p>    
+                    <a href="#modal-one" className="btn btn-big">
+                        Ask questions or share with the community....
+                    </a>
                 </div>
             </div>
             
@@ -24,7 +41,7 @@ const GridContainer = () => {
         <div className="comm-container">
             <div className="comm-box">
                     <div>
-                    <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/34/000000/external-machine-learning-robotics-flaticons-lineal-color-flat-icons.png"/>
+                    <img src={MACHINE_LEARNING_COMM} />
                     </div>
                     <div className="name-div">
                         <p className="comm-name">Machine Learning Gurus</p>    

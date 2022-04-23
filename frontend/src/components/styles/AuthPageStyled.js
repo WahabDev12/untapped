@@ -168,8 +168,10 @@ export const AuthStyled = styled.section`
     background-color: #c5ef53;
     font-size:15px;
     font-weight:600;
-    width:380px;
+    width:385px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
   }
 
   .submit-btn:hover{
@@ -235,10 +237,29 @@ export const AuthStyled = styled.section`
 
   .input-column-btn{
     width:538px;
+    display: flex;
+    justify-content: center;
   } 
 
   .sign-up{
     margin-left:70px;
+  }
+
+  .error-wrapper{
+     width:350px;
+     background-color:#FCD7D4;
+     font-weight:500;
+     font-size:16px;
+     padding:10px;
+     margin-bottom:1rem;
+     line-height: 1.5rem;
+     border-radius: 4px;;
+  }
+
+  .error > a{
+    text-decoration: underline;
+    font-weight:600;
+    padding-left:2px;
   }
 
 

@@ -25,7 +25,9 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants'
-import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+
+
+const devPort = "http://127.0.0.1:5000"
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -40,7 +42,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users/login',
+      `${devPort}/api/auth/login`,
       { email, password },
       config
     )
@@ -64,17 +66,13 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
-  localStorage.removeItem('cartItems')
-  localStorage.removeItem('shippingAddress')
-  localStorage.removeItem('paymentMethod')
   dispatch({ type: USER_LOGOUT })
   dispatch({ type: USER_DETAILS_RESET })
-  dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_RESET })
-  document.location.href = '/login'
+  document.location.href = '/app/login'
 }
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (firstName,lastName, email, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -87,8 +85,8 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users',
-      { name, email, password },
+      `${devPort}/api/auth/signup`,
+      { firstName,lastName, email, password },
       config
     )
 
@@ -130,7 +128,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/users/${id}`, config)
+    const { data } = await axios.get(`${devPort}/api/auth/${id}`, config)
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -168,7 +166,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put(`/api/users/profile`, user, config)
+    const { data } = await axios.put(`${devPort}/api/auth/profile`, user, config)
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -210,7 +208,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/users`, config)
+    const { data } = await axios.get(`${devPort}/api/auth/allUsers`, config)
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -247,7 +245,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`/api/users/${id}`, config)
+    await axios.delete(`${devPort}/api/auth/${id}`, config)
 
     dispatch({ type: USER_DELETE_SUCCESS })
   } catch (error) {
@@ -279,10 +277,11 @@ export const updateUser = (user) => async (dispatch, getState) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
+      
       },
     }
 
-    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+    const { data } = await axios.put(`${devPort}/api/auth/${user._id}`, user, config)
 
     dispatch({ type: USER_UPDATE_SUCCESS })
 

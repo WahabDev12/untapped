@@ -1,3 +1,4 @@
+import { DEFAULT_COVER_URL } from "./assets/images/imageUrl";
 import { GroupHeaderStyled } from "./styles/GroupHeaderStyled";
 
 const GroupHeader = () => {
@@ -6,10 +7,12 @@ const GroupHeader = () => {
            <GroupHeaderStyled>
                 <div className="group-info">
                         <div className="group-icon">
-                            <img src="https://img.icons8.com/color/30/000000/laptop--v1.png"/>
+                              <h1 className="emoji">💻</h1>
                         </div>
                         <div className="group-name">Software Engineering</div>
-                        <a className="members__privacy" href="">492,937 members | <ion-icon name="earth-outline"></ion-icon> Public</a>
+                        <a className="members__privacy" href="">
+                            492,937 members | <ion-icon name="earth-outline"></ion-icon> 
+                        Public</a>
                         <div className="desc-invite">
 
                         <div className="group-description">
@@ -28,7 +31,7 @@ const GroupHeader = () => {
                 <div className="banner-invite">
                     <div>
                         <img alt="group cover" 
-                        src="https://s3-us-west-1.amazonaws.com/images.jumpstart.me/frontend/communities/banners/Web/general.png"
+                        src={DEFAULT_COVER_URL}
                         className="banner"
                         />
                     </div>

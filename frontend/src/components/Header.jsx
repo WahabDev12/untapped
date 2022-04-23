@@ -1,11 +1,12 @@
 import { HeaderStyled } from "./styles/Header.Styled";
 import "./container.css";
+import { LOGO_URL } from './assets/images/imageUrl';
 
 const Header = () => {
     return ( 
         <>
         <HeaderStyled>
-        <img alt="logo" src="https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/45/000000/external-rocket-gaming-smashingstocks-circular-smashing-stocks.png"/>    
+        <img alt="logo" src={LOGO_URL} />    
         
             <h2>good_shit</h2>
              <span className="settings">

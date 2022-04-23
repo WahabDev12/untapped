@@ -2,9 +2,17 @@ import { OneTabStyled } from "./styles/OneTab.Styled";
 import { Icon } from '@iconify/react';
 import "./topsection.css";
 import { SideInputStyled } from "./styles/SideInputStyled";
+import { useSelector } from "react-redux";
 
 
 const OneTab = () => {
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    console.log(userInfo)
+
+
     return (  
         <>
         <a href="/app/home">
@@ -56,9 +64,9 @@ const OneTab = () => {
         <a href="/app/profile">
           <OneTabStyled>
             <div className="icon">
-            <img alt="avatar" className="avatar" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/34/000000/external-avatar-game-development-xnimrodx-lineal-color-xnimrodx-2.png"/>
+              <img alt="avatar" className="avatar" src={userInfo.profilePicture}/>
           </div>
-            <span>Abdul Wahab Abass</span>
+            <span>{userInfo.firstName} {userInfo.lastName}</span>
           </OneTabStyled>
         </a>
         <a href="/app/communities">

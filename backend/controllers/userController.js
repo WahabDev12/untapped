@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400)
-    throw new Error('User already exists')
+    throw new Error('This email address is already associated with a Good_Shit account.')
   }
 
   const user = await User.create({
@@ -51,6 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      profilePicture: user.profilePicture
     })
   } else {
     res.status(400)

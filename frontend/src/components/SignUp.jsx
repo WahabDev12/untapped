@@ -1,15 +1,52 @@
 import { AuthStyled } from "./styles/AuthPageStyled";
+import { useState,useEffect } from "react";
+import { register } from '../actions/userActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
+import { LOGO_URL } from "./assets/images/imageUrl";
+import { SIGN_UP_LOGO_URL } from "./assets/images/imageUrl";
 
 const SignUp = () => {
 
-    const ImageUrl = "https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/52/000000/external-rocket-gaming-smashingstocks-circular-smashing-stocks.png";
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [message, setMessage] = useState(null)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const userRegister = useSelector((state) => state.userRegister)
+    const { loading, error, userInfo } = userRegister
+
+    const redirect = window.location.search ? window.location.search.split('=')[1] : '/app/home'
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate(redirect)
+        }
+    }, [navigate, userInfo,redirect])
+
+    const handleSubmit = (e) => {   
+        e.preventDefault()
+        if(firstName === "" || lastName === ""){
+            setMessage("All fields required")
+        }
+        dispatch(register(firstName,lastName, email, password))
+        
+    }  
+
 
     return ( 
         <>
             <AuthStyled>
             <div className="sign-up-wrapper sign-up">
                      <div className="logo-heading">
-                         <img alt="logo" src={ImageUrl} />
+                         <img alt="logo" 
+                         src={LOGO_URL}
+                         />
                          <span>good_shit</span>
                      </div>
                      
@@ -26,52 +63,87 @@ const SignUp = () => {
                      </div>
 
                      <div className="login-alert">
-                        <small style={{color:"#434743"}}>Already a member? <a href="/app/login">Log In</a></small>
+                        <small style={{color:"#434743"}}>
+                            Already a member? <a href="/app/login">Log In</a></small>
 
                      </div>
-
-                    {/*             
-                      <div className="google-btn-wrapper">
-                          <button className="google-btn google-signup">
-                                <Icon icon="akar-icons:google-fill"  height="15" />
-                            <span className="btn-title ">Continue with Google</span>
-                          </button>
-                      </div> */}
-                    {/* 
-                    <div className="spacer spacer-large">
-                        <div className="line "></div>
-                            <small>or</small>
-                        <div className="line "></div>
-                    </div> */}
-                         
-
+                        {
+                            error && 
+                            <div className="error-wrapper"> 
+                                <span className="error">
+                                    {error}
+                                </span>
+                            </div>
+                        }
+                  
+                    <form required onSubmit={handleSubmit}>
                      <div className="input-fields">
                          <div className="first-last">
                              <div className="input-single">
                                  <p>First Name</p>
-                                <input type="text" className="input-text input-flex" placeholder="First Name" />
+                                <input
+                                    type="name" 
+                                    className="input-text input-flex" 
+                                    placeholder="First Name" 
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                 />
                              </div>
                              <div className="input-single">
                                  <p>Last Name</p>
-                                <input type="text" className="input-text input-flex" placeholder="Last Name" />
+                                <input 
+                                    type="name" 
+                                    className="input-text input-flex" 
+                                    placeholder="Last Name" 
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
                              </div>
                          </div>
                      
                          <p>Email</p>
-                         <input type="email" className="input-text input-column" placeholder="Email" />
+                         <input 
+                            type="email" 
+                            className="input-text input-column" 
+                            placeholder="Email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                          <p>Password</p>
-                         <input type="password" className="input-text input-column" placeholder="Password" />
+                         <input 
+                            type="password" 
+                            className="input-text input-column" 
+                            placeholder="Password" 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                      </div>
 
                      <div className="btn-wrapper">
-                         <button className="submit-btn input-column-btn">
-                             Sign Up
-                         </button>
+                         {
+                             !loading ?  
+                             <button type="submit"
+                             className="submit-btn input-column-btn">
+                              Sign Up
+                            </button>
+                                :
+                            <button type="submit" className="submit-btn input-column-btn">
+                                <TailSpin height="30" width="30" ariaLabel="loading-indicator" />
+                            </button>
+                         }
+                        
                      </div>
+
+                     </form>
 
                     <div className="footer footer-signup">
                         <hr style={{width:"530px"}}></hr>
-                        <p className="forgot-alert">By clicking on Sign Up, you're agreeing to Good Shit <a className="recover" href="">Terms of Use</a>
+                        <p className="forgot-alert">By clicking on Sign Up, 
+                            you're agreeing to Good Shit <a className="recover" href="">
+                            Terms of Use
+                        
+                        </a>
+                            
                         </p>
 
                     </div>
@@ -80,7 +152,7 @@ const SignUp = () => {
                 <div className="image-wrapper">
                    <img
                     className="img-illustration"
-                    src="https://cdn.dribbble.com/users/2187949/screenshots/15207330/media/d3413becb583b51571d9c8ee5184ad49.jpg" />
+                    src={SIGN_UP_LOGO_URL} />
                 </div>
 
 
