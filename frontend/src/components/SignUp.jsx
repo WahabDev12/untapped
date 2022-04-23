@@ -31,9 +31,6 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {   
         e.preventDefault()
-        if(firstName === "" || lastName === ""){
-            setMessage("All fields required")
-        }
         dispatch(register(firstName,lastName, email, password))
         
     }  
@@ -47,7 +44,7 @@ const SignUp = () => {
                          <img alt="logo" 
                          src={LOGO_URL}
                          />
-                         <span>good_shit</span>
+                         <span>spotlight</span>
                      </div>
                      
                      <div className="login-alert">
@@ -139,7 +136,7 @@ const SignUp = () => {
                     <div className="footer footer-signup">
                         <hr style={{width:"530px"}}></hr>
                         <p className="forgot-alert">By clicking on Sign Up, 
-                            you're agreeing to Good Shit <a className="recover" href="">
+                            you're agreeing to Spotlight <a className="recover" href="">
                             Terms of Use
                         
                         </a>

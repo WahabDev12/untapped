@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import Modal from "./Modal";
 import { MACHINE_LEARNING_COMM } from "./assets/images/imageUrl";
 import { useSelector } from "react-redux";
+import { useEffect } from 'react';
 
 const GridContainer = () => {
 
@@ -12,8 +13,9 @@ const GridContainer = () => {
     const postList = useSelector((state) => state.postList)
     const { loading, error, posts } = postList
 
-    console.log(postList);
-
+    useEffect(()=> {
+        console.log(postList.posts)
+    },[posts])
 
     return ( 
         <>
@@ -41,7 +43,7 @@ const GridContainer = () => {
         <div className="comm-container">
             <div className="comm-box">
                     <div>
-                    <img src={MACHINE_LEARNING_COMM} />
+                    <img src={ MACHINE_LEARNING_COMM } />
                     </div>
                     <div className="name-div">
                         <p className="comm-name">Machine Learning Gurus</p>    

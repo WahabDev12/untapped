@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as dotenv from "dotenv";
 
 import {
     USER_POST_REQUEST,
@@ -11,14 +12,25 @@ import {
 
 const devPort = "http://127.0.0.1:5000"
 
-export const listPosts = () => async (
+export const queryAllPosts = () => async (
     dispatch
   ) => {
     try {
       dispatch({ type: POST_LIST_REQUEST })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
   
       const { data } = await axios.get(
-        `${devPort}/api/post/all`
+        `${devPort}/api/post/all`,
+        config
       )
       dispatch({
         type: POST_LIST_SUCESSS,
@@ -33,4 +45,5 @@ export const listPosts = () => async (
             : error.message,
       })
     }
-  }
+}
+

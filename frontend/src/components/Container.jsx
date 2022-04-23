@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 const Container = () => {
     return (  
          <ContainerStyled>
-                <p className="alert">NEW JOBS ON SHITAPP</p>
+                <p className="alert">NEW JOBS ON SPOTLIGHT</p>
                 <div className="item-container">
                     
                 <div className="job">

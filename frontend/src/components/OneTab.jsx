@@ -61,10 +61,13 @@ const OneTab = () => {
         </a>
 
 
-        <a href="/app/profile">
+        <a href={`/app/profile/${userInfo._id}`}>
           <OneTabStyled>
             <div className="icon">
-              <img alt="avatar" className="avatar" src={userInfo.profilePicture}/>
+              <img alt="avatar" 
+                  className="avatar" 
+                  src={userInfo.profilePicture}
+              />
           </div>
             <span>{userInfo.firstName} {userInfo.lastName}</span>
           </OneTabStyled>

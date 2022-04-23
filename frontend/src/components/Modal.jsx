@@ -19,7 +19,7 @@ const Modal = () => {
                                  className="avatar"
                                  src={userInfo.profilePicture} 
                             />
-                               <a> {userInfo.firstName} {userInfo.lastName} </a>
+                               <a href={userInfo._id}> {userInfo.firstName} {userInfo.lastName} </a>
 
                             </span>
                             <span className="to">to</span>

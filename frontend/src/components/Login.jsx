@@ -42,7 +42,7 @@ const Login = () => {
                           alt="logo"
                           src={LOGO_URL}
                           />
-                         <span>good_shit</span>
+                         <span>spotlight</span>
                      </div>
 
                      <div className="login-alert">
