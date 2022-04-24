@@ -158,10 +158,12 @@ export const ModalStyled = styled.section`
        outline:none;
        border:none;
        color:#0e0e0e;
+       font-size:15px;
        background-color: #c9f270;
        border-radius: 8px;
        text-decoration: none;
        white-space: normal;
+       cursor: pointer;
    }
 
    .btn-close{

@@ -25,7 +25,7 @@ router.patch('/edit/:id', protect, editPost)
 router.patch('/commentedit/:id/:comment_id', protect, editComment)
 router.delete('/delete/:id', protect, deletePost)
 router.delete('/commentdelete/:id/:comment_id', protect, deleteComment)
-router.get('/all', protect, queryAllPosts)
+router.get('/all', queryAllPosts)
 router.get('/comments/all/:id', protect,postComments)
 router.get('/single/:id', protect, querySinglePost)
 

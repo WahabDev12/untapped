@@ -2,11 +2,13 @@ import "./container.css";
 import { Icon } from '@iconify/react';
 import Modal from "./Modal";
 import { MACHINE_LEARNING_COMM } from "./assets/images/imageUrl";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from 'react';
+import { queryAllPosts } from '../actions/postAction';
 
 const GridContainer = () => {
 
+    const dispatch = useDispatch()
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
@@ -14,8 +16,8 @@ const GridContainer = () => {
     const { loading, error, posts } = postList
 
     useEffect(()=> {
-        console.log(postList.posts)
-    },[posts])
+        dispatch(queryAllPosts())
+    },[])
 
     return ( 
         <>

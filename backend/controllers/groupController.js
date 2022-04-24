@@ -5,8 +5,8 @@ import Post from '../models/postsModel.js';
 import uploadImageToStorage from '../utils/fileUpload.js';
 
 // Folder path for group icon and cover photos
-const folderPathToAssets = "group-assets/";
-const folderPathToPosts = "group-posts/"
+const ASSETS_FOLDER = "group-assets/";
+const GROUP_POSTS_FOLDER = "group-posts/"
 
 /* Creating a new group and adding the admin to the members array. */
 const createGroup = asyncHandler(async (req,res)=> {
@@ -28,7 +28,7 @@ const createGroup = asyncHandler(async (req,res)=> {
     })
 
     if(icon){
-        uploadImageToStorage(file,folderPathToAssets)
+        uploadImageToStorage(file,ASSETS_FOLDER)
         .then((url) => {
         //   group.group_icon = url  
         group = {
@@ -238,7 +238,7 @@ const groupMembers = asyncHandler(async(req,res)=>{
 
 const queryAllGroups = asyncHandler(async(req,res)=>{
     await Group.find()
-    .select('name description group_privacy')
+    .select('name description group_privacy group_icon')
     .exec()
     .then(groups => {
         res.json({groups})

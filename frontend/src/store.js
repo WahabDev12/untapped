@@ -10,10 +10,19 @@ import {
     userListReducer,
     userDeleteReducer,
     userUpdateReducer,
-
   } from './reducers/userReducers'
 
-import { postListReducer } from './reducers/postReducers'
+import { 
+    postListReducer,
+    postCreateReducer,
+  
+} from './reducers/postReducers';
+
+
+import {
+  groupListReducer
+
+} from "./reducers/groupReducers";
 
 const middleware = [thunk]
 
@@ -25,7 +34,10 @@ const reducer = combineReducers({
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
-    postList: postListReducer
+    postList: postListReducer,
+    postCreate: postCreateReducer,
+    groupList: groupListReducer,
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
