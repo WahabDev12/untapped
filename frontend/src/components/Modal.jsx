@@ -3,14 +3,14 @@ import { useSelector,useDispatch } from "react-redux";
 import { createPost } from "../actions/postAction";
 import { useState,useEffect } from 'react';
 import { queryAllGroups } from '../actions/groupActions';
+import { TailSpin } from "react-loader-spinner";
 
 
 const Modal = () => {
 
-    const [title, setTitle] = useState("new test")
-    const [description, setDescription] = useState("this is a new test")
-    const [group, setGroup] = useState("Jack Group")
-    const [image, setImage] = useState("")
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [group, setGroup] = useState("")
 
 
     const userLogin = useSelector((state) => state.userLogin)
@@ -29,8 +29,8 @@ const Modal = () => {
 
     const handleSubmit = (e) => {   
         e.preventDefault()
-        dispatch(createPost(title, description, group, image))
-        console.log(dispatch(createPost(title, description, group, image)))
+        dispatch(createPost(title, description, group))
+        console.log(dispatch(createPost(title, description, group)))
     }  
 
     return ( 
@@ -47,7 +47,9 @@ const Modal = () => {
                                  className="avatar"
                                  src={userInfo.profilePicture} 
                             />
-                               <a href={userInfo._id}> {userInfo.firstName} {userInfo.lastName} </a>
+                            <a href={userInfo._id}>
+                                {userInfo.firstName} {userInfo.lastName} 
+                            </a>
 
                             </span>
                             <span className="to">to</span>
@@ -55,7 +57,7 @@ const Modal = () => {
                                value = {group} 
                                onChange={(e) => {setGroup(e.target.value)}}
                             >
-                                <option> Select community</option>
+                                <option > Select community</option>
 
                                 {
                                     groups ? groups.map((group)=> {
@@ -63,7 +65,7 @@ const Modal = () => {
                                            {group.group_icon} {group.name} </option>
                                     }) : 
 
-                                    <option>Loading...</option>
+                                    <option disabled >Loading groups...</option>
                                 }
 
                             </select>
@@ -72,7 +74,7 @@ const Modal = () => {
                         <a href="#close" className="btn-close" aria-hidden="true">×</a>
                     </div>
 
-                    <form onSubmit = {handleSubmit} >
+                    <form onSubmit = {handleSubmit}>
                         <div className="modal-body">
                             <input className="title" 
                                 type="text" 
@@ -90,16 +92,16 @@ const Modal = () => {
                             </textarea>  
 
                         </div>
-                        <div className="modal-footer">  
-                            <a href="#close">
-                                <button type="submit" className="post-btn">
-                                    Post    
-                                </button>
-                            </a> 
+                        <div className="modal-footer"> 
+                        
+                            <button type="submit" href="#close" className="post-btn" >
+                                    Post
+                            </button>
+                            
                         </div>
                     </form>
                 </div>  
-          </div>
+            </div>
         </ModalStyled>
      );
 }
