@@ -9,10 +9,10 @@ export const HeaderStyled = styled.header`
   z-index: inherit;
  
   h2{
-    font-size: 17.5px;
+    font-size: 20.5px;
     font-weight:300;
     padding-left: 7px;
-    font-family:'Inter',sans-serif;
+    font-family:"Comic sans";
   }
 
   .notifications{

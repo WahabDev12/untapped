@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Karla&display=swap');
 
-  *{
+*{
       font-family: 'Inter',sans-serif;
   }
 
@@ -44,11 +44,14 @@
 
   .avatar{
       border-radius: 1000px;
+      height:50px;
+      width:50px;
   }
 
   .one{
       height:120px;
   }
+
 
   .three{
     height: 275px;
@@ -88,7 +91,7 @@
     font-size: 30px;
     font-weight:500;
     margin: 20px 5px;
-    font-family: "Poppins";
+    font-family: "Comic sans";
   }
   
   .make-post{
@@ -126,6 +129,7 @@
     font-size:.75rem;
     color:#0e0e0e;
     font-weight:600;
+    
   }
 
   .name-and-content > p > small{
@@ -377,6 +381,10 @@
     .name-and-input > a{
       font-size:0.95rem;
       line-height:130%;
+    }
+    .user-name{
+      text-transform: capitalize;
+
     }
 
     .two{

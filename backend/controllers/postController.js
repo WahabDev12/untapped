@@ -6,6 +6,8 @@ import Comment from '../models/commentModel.js';
 
 /* Creating a post and saving it to the database. */
 const createPost = asyncHandler(async (req,res) =>{
+
+    const ALL_POSTS_FOLDER = "all-posts/";
     const {title, description, group} = req.body;
     
     const user = await User.findById(req.user._id);
@@ -29,12 +31,19 @@ const createPost = asyncHandler(async (req,res) =>{
     }
     if(req.files){
 
-        const { data, mimetype } = req.files.file;
+        uploadImageToStorage(file,ALL_POSTS_FOLDER)
+        .then((url) => {
         post = {
             ...post,
-            image: { data, contentType: mimetype },
-            hasImage: true,
-        };  
+            image: url
+        }
+         
+        })
+        .catch((error) => {
+          return res.status(500).send({
+            error: error
+          });
+        });
     }
 
     post = new Post(post);

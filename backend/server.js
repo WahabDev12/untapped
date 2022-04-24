@@ -1,17 +1,19 @@
 import express from 'express'
-import dotenv from 'dotenv'
+import * as  dotenv from 'dotenv'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
 import postRoutes from "./routes/postRoutes.js"
 import groupRoutes from './routes/groupRoutes.js'
-
+import cors from "cors"
 
 dotenv.config()
 
 connectDB()
 
-const app = express()
+const app = express() 
+
+app.use(cors())
 
 app.use(express.json())
 

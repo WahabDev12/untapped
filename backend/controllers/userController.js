@@ -29,11 +29,16 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body
 
+  if(firstName=== "" || lastName === "" || email === "" || password === ""){
+    res.status(400)
+    throw new Error('All fields required. Please fill the form')
+  }
+
   const userExists = await User.findOne({ email })
 
   if (userExists) {
     res.status(400)
-    throw new Error('User already exists')
+    throw new Error('This email address is already associated with a Spotlight account.')
   }
 
   const user = await User.create({
@@ -43,6 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
   })
 
+
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -51,6 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
+      profilePicture: user.profilePicture
     })
   } else {
     res.status(400)

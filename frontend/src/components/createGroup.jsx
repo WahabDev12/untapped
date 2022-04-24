@@ -115,7 +115,7 @@ const CreateGroup = () => {
                             <input className="checkbox-input" type="checkbox" />
                             <span className="terms-text">
                                 I have read the <a className="link-to" href="/app/terms-and-conditions">
-                                    Good_Shit Code of Conduct</a> and I agree to enforce it in my community
+                                    Spotlight Code of Conduct</a> and I agree to enforce it in my community
                             </span>
                         </label>
                         </div>
