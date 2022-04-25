@@ -15,7 +15,11 @@ const createPost = asyncHandler(async (req,res) =>{
     if(!user){
         res.status(400)
         throw new Error("User not found");
+    }
 
+    if(title === "" || description === "" || group === ""){
+        res.status(400)
+        throw new Error('All fields required. Please fill the form')
     }
     const community = await Group.findOne({name: group}).select('group_privacy');
     const communityToAdd =  await Group.findById(community._id);
@@ -29,6 +33,7 @@ const createPost = asyncHandler(async (req,res) =>{
         author_id: user._id,
         author_profile: user.profilePicture
     }
+
     if(req.files){
 
         uploadImageToStorage(file,ALL_POSTS_FOLDER)

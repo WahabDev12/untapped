@@ -32,7 +32,8 @@ export const queryAllPosts = () => async (
 
     const { data } = await axios.get(
       `${devPort}/api/post/all`,
-        config
+        config,
+       
     )
 
     dispatch({
@@ -63,7 +64,6 @@ export const createPost = (title, description, group) => async (dispatch, getSta
       const config = {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
-          'Content-Type': 'application/json',
         },
       }
   

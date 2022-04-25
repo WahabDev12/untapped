@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import Modal from "./Modal";
 import { MACHINE_LEARNING_COMM } from "./assets/images/imageUrl";
 import { useSelector,useDispatch } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { queryAllPosts } from '../actions/postAction';
 
 const GridContainer = () => {
@@ -19,6 +19,7 @@ const GridContainer = () => {
         dispatch(queryAllPosts())
     },[])
 
+
     return ( 
         <>
         <section id="grid-container">
@@ -31,8 +32,10 @@ const GridContainer = () => {
                      />
                 </div>
                 <div className="name-and-input">
-                    <p className="user-name">{ userInfo.firstName} {userInfo.lastName}</p>    
-                    <a href="#modal-one" className="btn btn-big">
+                    <p className="user-name">{userInfo.firstName} {userInfo.lastName}</p>    
+                    <a 
+                    href="#modal-one"
+                    className="btn btn-big">
                         Ask questions or share with the community....
                     </a>
                 </div>

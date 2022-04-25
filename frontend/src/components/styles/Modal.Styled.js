@@ -35,7 +35,8 @@ export const ModalStyled = styled.section`
         left: 40%;
         top: -100%;
         z-index: 11;
-        height:46%;
+        height:50%;
+        max-height:100%;
         width: 45em;
         max-width: 100%;
         -webkit-transform: translate(0, -500%);
@@ -178,6 +179,31 @@ export const ModalStyled = styled.section`
         background-color:#fff;
    }
 
+   .error-wrapper{
+     width:400px;
+     margin:auto;
+     background-color:#FCD7D4;
+     display: flex;
+     justify-content: center;
+     font-weight:500;
+     font-size:16px;
+     padding:10px;
+     margin-bottom:1rem;
+     line-height: 1.5rem;
+     border-radius: 4px;;
+  }
+
+  .success {
+      background-color: #c2f1c2;
+  }
+
+
+
+  .error > a{
+    text-decoration: underline;
+    font-weight:600;
+  }
+
     @media (max-width: 950px) {
         .modal-dialog{
             width:30em;
@@ -198,6 +224,8 @@ export const ModalStyled = styled.section`
     }
 
     }
+
+
 
 
 `

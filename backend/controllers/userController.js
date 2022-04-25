@@ -42,10 +42,10 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    firstName,
-    lastName,
-    email,
-    password,
+      firstName,
+      lastName,
+      email,
+      password,
   })
 
 

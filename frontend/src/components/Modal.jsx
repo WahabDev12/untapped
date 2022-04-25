@@ -11,35 +11,64 @@ const Modal = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [group, setGroup] = useState("")
-
+    const [isFailed,setIsFailed]  = useState(null)
+    const [success, setIsSuccess] = useState(null)
+    const [isPosting, setIsPosting] = useState(false)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
     const dispatch = useDispatch()
 
-
     const groupList = useSelector((state) => state.groupList)
     const { loading, error, groups } = groupList
 
+
     useEffect(()=> {
         dispatch(queryAllGroups())
+        setIsPosting(false)
     },[])
     
-
-    const handleSubmit = (e) => {   
+    const handleSubmit = (e) => { 
         e.preventDefault()
-        dispatch(createPost(title, description, group))
-        console.log(dispatch(createPost(title, description, group)))
+        if(description === "" || title === "" || group === ""){
+            setIsFailed("All fields required. Please fill the form")
+            setIsPosting(false)
+        }
+        else{
+            dispatch(createPost(title, description, group))
+            setIsSuccess("Post successful")
+            setIsPosting(true)
+        }
+
     }  
 
     return ( 
 
         <ModalStyled>
+        <form required onSubmit={handleSubmit}>
            <div className="modal" id="modal-one" aria-hidden="true">
                 <div className="modal-dialog">
 
                     <div className="modal-header">
+                    {
+                        isFailed && 
+                            <div className="error-wrapper"> 
+                                <span className="error">
+                                    {isFailed}
+                                </span>
+                            </div>
+                    }
+
+                    {
+                        success && 
+                            <div className="error-wrapper success"> 
+                                <span className="error">
+                                    {success}
+                                </span>
+                            </div>
+                    }
+
                         <div className="dropdown">
 
                             <span className="user-post-name">
@@ -54,6 +83,7 @@ const Modal = () => {
                             </span>
                             <span className="to">to</span>
                             <select
+                               required
                                value = {group} 
                                onChange={(e) => {setGroup(e.target.value)}}
                             >
@@ -61,8 +91,8 @@ const Modal = () => {
 
                                 {
                                     groups ? groups.map((group)=> {
-                                       return  <option key={group._id}>
-                                           {group.group_icon} {group.name} </option>
+                                       return  <option key={group._id} value={group.name}>
+                                         {group.name} </option>
                                     }) : 
 
                                     <option disabled >Loading groups...</option>
@@ -74,7 +104,6 @@ const Modal = () => {
                         <a href="#close" className="btn-close" aria-hidden="true">×</a>
                     </div>
 
-                    <form onSubmit = {handleSubmit}>
                         <div className="modal-body">
                             <input className="title" 
                                 type="text" 
@@ -93,15 +122,24 @@ const Modal = () => {
 
                         </div>
                         <div className="modal-footer"> 
-                        
-                            <button type="submit" href="#close" className="post-btn" >
-                                    Post
-                            </button>
+                            {
+                                !isPosting ? 
+
+                                <button href="#close" className="post-btn" >
+                                        Post
+                                </button>
+                                :
+                                <button disabled  className="post-btn" href="#close">
+                                    <TailSpin width={20} height={20} ariaLabel="loading-indicator" />
+                                </button>
+                            
+                            }
                             
                         </div>
-                    </form>
                 </div>  
+                
             </div>
+        </form>
         </ModalStyled>
      );
 }
