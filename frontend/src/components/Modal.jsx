@@ -4,6 +4,7 @@ import { createPost } from "../actions/postAction";
 import { useState,useEffect } from 'react';
 import { queryAllGroups } from '../actions/groupActions';
 import { TailSpin } from "react-loader-spinner";
+import { toast } from 'react-toastify';
 
 
 const Modal = () => {
@@ -11,9 +12,8 @@ const Modal = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [group, setGroup] = useState("")
-    const [isFailed,setIsFailed]  = useState(null)
-    const [success, setIsSuccess] = useState(null)
     const [isPosting, setIsPosting] = useState(false)
+    const [isPosted, setIsPosted] = useState(isPosting)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -32,13 +32,29 @@ const Modal = () => {
     const handleSubmit = (e) => { 
         e.preventDefault()
         if(description === "" || title === "" || group === ""){
-            setIsFailed("All fields required. Please fill the form")
             setIsPosting(false)
+
+            // Show user notification
+            toast.error("All fields required", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose:2000,
+                theme: "colored"
+              });  
         }
         else{
             dispatch(createPost(title, description, group))
-            setIsSuccess("Post successful")
             setIsPosting(true)
+            if(setIsPosting){
+                setIsPosted(false)
+            }
+            setIsPosted(true)
+            // Show user notification   
+            toast.success("Post added successfully", {
+                position: toast.POSITION.BOTTOM_LEFT, 
+                autoClose:4000,
+                theme: "colored"
+              });  
+
         }
 
     }  
@@ -47,27 +63,12 @@ const Modal = () => {
 
         <ModalStyled>
         <form required onSubmit={handleSubmit}>
-           <div className="modal" id="modal-one" aria-hidden="true">
+           <div className={isPosted === true ? "close" : "modal"}
+                id="modal-one" aria-hidden="true"
+            >
                 <div className="modal-dialog">
 
                     <div className="modal-header">
-                    {
-                        isFailed && 
-                            <div className="error-wrapper"> 
-                                <span className="error">
-                                    {isFailed}
-                                </span>
-                            </div>
-                    }
-
-                    {
-                        success && 
-                            <div className="error-wrapper success"> 
-                                <span className="error">
-                                    {success}
-                                </span>
-                            </div>
-                    }
 
                         <div className="dropdown">
 
@@ -76,7 +77,7 @@ const Modal = () => {
                                  className="avatar"
                                  src={userInfo.profilePicture} 
                             />
-                            <a href={userInfo._id}>
+                            <a href={`/app/profile/${userInfo._id}`}>
                                 {userInfo.firstName} {userInfo.lastName} 
                             </a>
 
@@ -90,7 +91,7 @@ const Modal = () => {
                                 <option > Select community</option>
 
                                 {
-                                    groups ? groups.map((group)=> {
+                                    !loading ? groups.map((group)=> {
                                        return  <option key={group._id} value={group.name}>
                                          {group.name} </option>
                                     }) : 
@@ -125,11 +126,11 @@ const Modal = () => {
                             {
                                 !isPosting ? 
 
-                                <button href="#close" className="post-btn" >
+                                <button  className="post-btn" >
                                         Post
                                 </button>
                                 :
-                                <button disabled  className="post-btn" href="#close">
+                                <button disabled  className="post-btn" >
                                     <TailSpin width={20} height={20} ariaLabel="loading-indicator" />
                                 </button>
                             

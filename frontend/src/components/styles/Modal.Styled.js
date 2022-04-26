@@ -35,9 +35,9 @@ export const ModalStyled = styled.section`
         left: 40%;
         top: -100%;
         z-index: 11;
-        height:50%;
+        height:48%;
         max-height:100%;
-        width: 45em;
+        width: 47em;
         max-width: 100%;
         -webkit-transform: translate(0, -500%);
         -ms-transform: translate(0, -500%);
@@ -46,7 +46,9 @@ export const ModalStyled = styled.section`
         
     }
 
-    
+    .adjust{
+        height:57%;
+    }
 
     .modal-body {
         padding-left: 30px;
@@ -70,7 +72,7 @@ export const ModalStyled = styled.section`
     }
 
     /*ADDED TO STOP SCROLLING TO TOP*/
-    #close {
+    .close {
         display: none;
     }
 
@@ -147,12 +149,27 @@ export const ModalStyled = styled.section`
        border: none;
        max-height:100%;
        resize: none;
+       overflow-y: scroll;
        word-wrap: break-word;
-       overflow-y: hidden;
        padding: 0.625rem 0 1.20rem 0;
        
    }
 
+    textarea::-webkit-scrollbar {
+        width: 0.5em;
+        border-radius: 1rem;
+        background-color: #5F70CF;
+        height:100%;
+    }
+ 
+    textarea::-webkit-scrollbar-track {
+        border-radius: 1000px;
+        height:100%;
+
+    }
+    
+ 
+   
    .post-btn{
        padding:10px 40px 10px 40px;
        height: 2.5rem;
@@ -182,8 +199,7 @@ export const ModalStyled = styled.section`
    .error-wrapper{
      width:400px;
      margin:auto;
-     background-color:#FCD7D4;
-     display: flex;
+     display: none;
      justify-content: center;
      font-weight:500;
      font-size:16px;
@@ -194,8 +210,15 @@ export const ModalStyled = styled.section`
   }
 
   .success {
+      display:flex;
       background-color: #c2f1c2;
   }
+
+  .failure{
+      display: flex;
+      background-color:#FCD7D4;
+  }
+
 
 
 
