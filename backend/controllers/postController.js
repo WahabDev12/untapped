@@ -40,7 +40,8 @@ const createPost = asyncHandler(async (req,res) =>{
         .then((url) => {
         post = {
             ...post,
-            image: url
+            image: url,
+            hasImage: true,
         }
          
         })

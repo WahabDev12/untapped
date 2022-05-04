@@ -54,6 +54,7 @@ const Modal = () => {
                 autoClose:4000,
                 theme: "colored"
               });  
+            window.location.reload("/app/home")
 
         }
 

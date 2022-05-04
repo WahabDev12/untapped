@@ -28,17 +28,22 @@ const Post  = () => {
 
         <div>
         {
-            !loading ? posts.map((post)=> {
+            !loading && posts.length !== 0 
+                ? posts.map((post)=> {
                 return <a href={`/app/post/details/${post._id}`}>
                 <div key={post._id}  className="post-wrapper">
                 <div className="post-box">
                     <div>
-                        <img className="avatar" src={post.author_profile}/>
+                        <img className="avatar"
+                            src={post.author_profile}
+                        />
                     </div>
                     <div className="name-and-content">
-                        <p><a href={`/app/profile/${post.author_id}`}>
+                        <p>
+                            <a href={`/app/profile/${post.author_id}`}>
                             {post.author_name}</a> <small>in</small> <a href={`/app/group/details/${post.group_Id}`}>
-                            💡 {post.group}</a></p>    
+                            💡 {post.group}</a>
+                        </p>    
                         <a>University of Ghana . 2 days ago . 451 views</a>
                     </div>
                 </div>
@@ -74,10 +79,21 @@ const Post  = () => {
             
             }) :
             <div className="loading-div">
-                <TailSpin color="#ACACAC" width="50" height="50" ariaLabel="loading-indicator" />
+                <TailSpin color="#ACACAC" 
+                    width="50" height="50" 
+                    ariaLabel="loading-indicator" 
+                />
                     
             </div>
+            
 
+         }
+
+         {
+             posts.length === 0 &&
+             <div className="loading-div">
+                 <p>Ooops..No post yet 😥</p>
+             </div>
          }
          </div>
          </PostStyled>
