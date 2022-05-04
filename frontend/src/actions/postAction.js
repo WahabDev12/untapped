@@ -32,7 +32,8 @@ export const queryAllPosts = () => async (
 
     const { data } = await axios.get(
       `${devPort}/api/post/all`,
-        config
+        config,
+       
     )
 
     dispatch({
@@ -50,7 +51,7 @@ export const queryAllPosts = () => async (
   }
 }
 
-export const createPost = (title, description, group, image) => async (dispatch, getState) => {
+export const createPost = (title, description, group) => async (dispatch, getState) => {
     try {
       dispatch({
         type: USER_POST_REQUEST,
@@ -66,9 +67,10 @@ export const createPost = (title, description, group, image) => async (dispatch,
         },
       }
   
-      const { data } = await axios.post(`${devPort}/api/post/create`, 
-          {title, description, group, image},
-          config
+      const { data } = await axios.post(
+        `${devPort}/api/post/create`, 
+        {title, description, group},
+        config
       )
   
       dispatch({
@@ -84,7 +86,6 @@ export const createPost = (title, description, group, image) => async (dispatch,
          console.log("Not authorized")
         //  dispatch(logout())
 
-         // insert user logout function here !!
       }
       dispatch({
         type: USER_POST_FAIL,

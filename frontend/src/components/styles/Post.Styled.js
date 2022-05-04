@@ -1,8 +1,11 @@
+import styled from "styled-components";
+
+export const PostStyled = styled.section`
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Karla&display=swap');
 
 *{
       font-family: 'Inter',sans-serif;
-  }
+}
 
   #grid-container {
     display: grid;
@@ -211,7 +214,6 @@
     max-width:100%;
     max-height:100%;
     margin-bottom:1rem;
-
   }
 
   .trend-reactions-tab{
@@ -220,9 +222,6 @@
     margin-bottom:5px;
   }
 
-  .react-btn{
-    width:120px;
-  }
 
   .trend-reactions-tab > button{
     margin: 0px 7px 7px 3px;
@@ -232,6 +231,12 @@
     border: none;
     color:#666;
     background-color: #fff;
+  }
+
+  .loading-div{
+      margin-top:5rem;
+      display: flex;
+      justify-content: center;
   }
 
   /* END OF TRENDING BAR */
@@ -257,7 +262,6 @@
       padding:1px;
       margin-top:10px;
     }
-
 
     .create-comm{
       margin-top:10px;
@@ -293,6 +297,7 @@
       font-weight:600;
       line-height: 130%;
       font-size:1.05rem;
+      text-transform: capitalize;
       display:flex;
       flex-wrap:wrap;
       margin-bottom:0.25rem;
@@ -312,20 +317,18 @@
       margin-bottom:1.2em;
     }
 
-    /* REACTIONS TAB*/
+
+    /* REACTIONS TAB */
     .reactions-tab{
-      display: grid; 
-      grid-template-rows: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      gap: 7px;
+      width:370px;
+      display: flex;
+      justify-content: space-between;
       height: 100%;
   }
 
-  .reactions-tab > button{
+  .react-btn{
+      max-width: 100%;
       outline:none;
-      width:110px;
-      max-width:100%;
-      padding:8px;
       border:1px solid #a6a6a6;
       border-radius:100px;  
       font-family:'Inter',sans-serif ;
@@ -333,10 +336,15 @@
       background-color:#fff;
       font-weight:400;
       color:#666;
+      align-items: center;
+  }
+
+  .react-btn > span{
+      padding-left:3px;
   }
 
   .comment-btn{
-      width:120px;
+      width:125px;
   }
 
   /* MODAL BUTTON */
@@ -347,17 +355,17 @@
 
 
     .btn-close {
-      color: #aaaaaa;
-      font-size: 30px;
-      text-decoration: none;
-      position: absolute;
-      right: 5px;
-      top: 0;
+        color: #aaaaaa;
+        font-size: 30px;
+        text-decoration: none;
+        position: absolute;
+        right: 5px;
+        top: 0;
     }
 
     .btn-close:hover {
     color: #919191;
-  }
+    }
 
 
   /* GROUP CREATION*/
@@ -418,3 +426,5 @@
   }
 
   
+
+`

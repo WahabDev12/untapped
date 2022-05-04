@@ -10,7 +10,7 @@ const ThreeCards = () => {
              </div>
              <div>
                   <img  alt="events" src={NETWORK_URL}/>
-                  <p>Build Network</p>
+                  <p>Build Networks</p>
              </div>
              <div>
                   <img alt="companies" className="jobs-sticker" src={COMPANIES_URL}/>

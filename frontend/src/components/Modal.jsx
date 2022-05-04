@@ -3,43 +3,74 @@ import { useSelector,useDispatch } from "react-redux";
 import { createPost } from "../actions/postAction";
 import { useState,useEffect } from 'react';
 import { queryAllGroups } from '../actions/groupActions';
+import { TailSpin } from "react-loader-spinner";
+import { toast } from 'react-toastify';
 
 
 const Modal = () => {
 
-    const [title, setTitle] = useState("new test")
-    const [description, setDescription] = useState("this is a new test")
-    const [group, setGroup] = useState("Jack Group")
-    const [image, setImage] = useState("")
-
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [group, setGroup] = useState("")
+    const [isPosting, setIsPosting] = useState(false)
+    const [isPosted, setIsPosted] = useState(isPosting)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
     const dispatch = useDispatch()
 
-
     const groupList = useSelector((state) => state.groupList)
     const { loading, error, groups } = groupList
 
+
     useEffect(()=> {
         dispatch(queryAllGroups())
+        setIsPosting(false)
     },[])
     
-
-    const handleSubmit = (e) => {   
+    const handleSubmit = (e) => { 
         e.preventDefault()
-        dispatch(createPost(title, description, group, image))
-        console.log(dispatch(createPost(title, description, group, image)))
+        if(description === "" || title === "" || group === ""){
+            setIsPosting(false)
+
+            // Show user notification
+            toast.error("All fields required", {
+                position: toast.POSITION.BOTTOM_LEFT,
+                autoClose:2000,
+                theme: "colored"
+              });  
+        }
+        else{
+            dispatch(createPost(title, description, group))
+            setIsPosting(true)
+            if(setIsPosting){
+                setIsPosted(false)
+            }
+            setIsPosted(true)
+            // Show user notification   
+            toast.success("Post added successfully", {
+                position: toast.POSITION.BOTTOM_LEFT, 
+                autoClose:4000,
+                theme: "colored"
+              });  
+            window.location.reload("/app/home")
+
+        }
+
     }  
 
     return ( 
 
         <ModalStyled>
-           <div className="modal" id="modal-one" aria-hidden="true">
+        <form required onSubmit={handleSubmit}>
+           <div className={isPosted === true ? "close" : "modal"}
+                id="modal-one" aria-hidden="true"
+            >
                 <div className="modal-dialog">
 
                     <div className="modal-header">
+
                         <div className="dropdown">
 
                             <span className="user-post-name">
@@ -47,23 +78,26 @@ const Modal = () => {
                                  className="avatar"
                                  src={userInfo.profilePicture} 
                             />
-                               <a href={userInfo._id}> {userInfo.firstName} {userInfo.lastName} </a>
+                            <a href={`/app/profile/${userInfo._id}`}>
+                                {userInfo.firstName} {userInfo.lastName} 
+                            </a>
 
                             </span>
                             <span className="to">to</span>
                             <select
+                               required
                                value = {group} 
                                onChange={(e) => {setGroup(e.target.value)}}
                             >
-                                <option> Select community</option>
+                                <option > Select community</option>
 
                                 {
-                                    groups ? groups.map((group)=> {
-                                       return  <option key={group._id}>
-                                           {group.group_icon} {group.name} </option>
+                                    !loading ? groups.map((group)=> {
+                                       return  <option key={group._id} value={group.name}>
+                                         {group.name} </option>
                                     }) : 
 
-                                    <option>Loading...</option>
+                                    <option disabled >Loading groups...</option>
                                 }
 
                             </select>
@@ -72,7 +106,6 @@ const Modal = () => {
                         <a href="#close" className="btn-close" aria-hidden="true">×</a>
                     </div>
 
-                    <form onSubmit = {handleSubmit} >
                         <div className="modal-body">
                             <input className="title" 
                                 type="text" 
@@ -90,16 +123,25 @@ const Modal = () => {
                             </textarea>  
 
                         </div>
-                        <div className="modal-footer">  
-                            <a href="#close">
-                                <button type="submit" className="post-btn">
-                                    Post    
+                        <div className="modal-footer"> 
+                            {
+                                !isPosting ? 
+
+                                <button  className="post-btn" >
+                                        Post
                                 </button>
-                            </a> 
+                                :
+                                <button disabled  className="post-btn" >
+                                    <TailSpin width={20} height={20} ariaLabel="loading-indicator" />
+                                </button>
+                            
+                            }
+                            
                         </div>
-                    </form>
                 </div>  
-          </div>
+                
+            </div>
+        </form>
         </ModalStyled>
      );
 }

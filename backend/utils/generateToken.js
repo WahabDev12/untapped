@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken'
-import * as dotenv from "dotenv"
+const JWT_SECRET = 'OnePiece'
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '2 days'
+  return jwt.sign({ id }, JWT_SECRET, {
+    expiresIn: '4 days'
   })
 }
-
 
 export default generateToken

@@ -120,9 +120,9 @@ const SignUp = () => {
                          {
                              !loading ?  
                              <button type="submit"
-                             className="submit-btn input-column-btn">
-                              Sign Up
-                            </button>
+                                className="submit-btn input-column-btn">
+                                Sign Up
+                             </button>
                                 :
                             <button type="submit" className="submit-btn input-column-btn">
                                 <TailSpin height="30" width="30" ariaLabel="loading-indicator" />
@@ -138,7 +138,6 @@ const SignUp = () => {
                         <p className="forgot-alert">By clicking on Sign Up, 
                             you're agreeing to Spotlight <a className="recover" href="">
                             Terms of Use
-                        
                         </a>
                             
                         </p>
