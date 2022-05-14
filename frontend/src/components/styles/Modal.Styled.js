@@ -68,7 +68,10 @@ export const ModalStyled = styled.section`
     }
 
     .modal-footer {
+        display:flex;
+        justify-content: space-between;
         text-align: right;
+        align-items: center;
     }
 
     /*ADDED TO STOP SCROLLING TO TOP*/
@@ -219,7 +222,59 @@ export const ModalStyled = styled.section`
       background-color:#FCD7D4;
   }
 
+    .icon{
+        color: #fff;
+        font-size: 1.125rem;
+        cursor: pointer;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius:4px;
+        align-items: center;
+        justify-content: center;
+        background: #718df2 ;
+        height: 2rem;
+        font-weight: bolder;
+        width: 5rem;
+        margin-right: .5rem;
+    }
 
+    .icon:hover{
+        background-color:#4067E6;
+    }
+
+    .field-label{
+        color: #666;
+        font-size: 1.125rem;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: .5rem;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .file-input{
+        -webkit-font-smoothing: antialiased;
+        -webkit-box-direction: normal;
+        display: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .editor{
+        display:flex;
+        align-items: center;
+    }
 
 
   .error > a{

@@ -56,6 +56,7 @@ const GridContainer = () => {
         <div className="grid-item three">
                    
             <Post />
+            <div style={{height:"50px"}}></div>
                 
         </div>
 
@@ -133,7 +134,7 @@ const GridContainer = () => {
                     <button ><Icon icon="fa6-regular:comment" width="17" inline={true} /> 2</button>
                     <button><Icon icon="akar-icons:bell" width="17" inline={true} /> Follow</button>   
                 </div>
-                </div>
+            </div>
         </div>
         </a>
 

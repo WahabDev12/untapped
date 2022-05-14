@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 import { PostStyled } from "./styles/Post.Styled";
 import 'react-loading-skeleton/dist/skeleton.css';
 import { TailSpin } from "react-loader-spinner";
+import { MACHINE_LEARNING_COMM } from './assets/images/imageUrl';
 
 
 const Post  = () => {
@@ -41,7 +42,8 @@ const Post  = () => {
                     <div className="name-and-content">
                         <p>
                             <a href={`/app/profile/${post.author_id}`}>
-                            {post.author_name}</a> <small>in</small> <a href={`/app/group/details/${post.group_Id}`}>
+                            {post.author_name}</a> <small>in</small> 
+                            <a href={`/app/group/details/${post.group_Id}`}>
                             💡 {post.group}</a>
                         </p>    
                         <a>University of Ghana . 2 days ago . 451 views</a>
@@ -85,7 +87,6 @@ const Post  = () => {
                 />
                     
             </div>
-            
 
          }
 

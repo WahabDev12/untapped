@@ -95,7 +95,8 @@ const Login = () => {
 
                     <div className="footer">
                         <hr></hr>
-                        <p className="forgot-alert">Forgot Password? <a className="recover" href="">Recover Password</a>
+                        <p className="forgot-alert">
+                            Forgot Password? <a className="recover" href="">Recover Password</a>
                         </p>
 
                     </div>
