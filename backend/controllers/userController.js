@@ -113,6 +113,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 })
 
 
+
 // all users
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({})
@@ -203,7 +204,7 @@ const uploadProfile = asyncHandler(async(req,res)=> {
   }
 })
 
-
+  
 
 export {
   authUser,

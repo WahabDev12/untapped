@@ -5,6 +5,7 @@ import { useState,useEffect } from 'react';
 import { queryAllGroups } from '../actions/groupActions';
 import { TailSpin } from "react-loader-spinner";
 import { toast } from 'react-toastify';
+import { Icon } from '@iconify/react';
 
 
 const Modal = () => {
@@ -39,7 +40,7 @@ const Modal = () => {
                 position: toast.POSITION.BOTTOM_LEFT,
                 autoClose:2000,
                 theme: "colored"
-              });  
+            });  
         }
         else{
             dispatch(createPost(title, description, group))
@@ -53,7 +54,7 @@ const Modal = () => {
                 position: toast.POSITION.BOTTOM_LEFT, 
                 autoClose:4000,
                 theme: "colored"
-              });  
+            });  
             window.location.reload("/app/home")
 
         }
@@ -89,7 +90,7 @@ const Modal = () => {
                                value = {group} 
                                onChange={(e) => {setGroup(e.target.value)}}
                             >
-                                <option > Select community</option>
+                            <option > Select community</option>
 
                                 {
                                     !loading ? groups.map((group)=> {
@@ -116,14 +117,34 @@ const Modal = () => {
 
                             <br></br>
                             <textarea className="caption"
-                                    placeholder="Add a description or link (optional)"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}   
+                                placeholder="Add a description or link (optional)"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}   
                             >
                             </textarea>  
 
                         </div>
                         <div className="modal-footer"> 
+                            <div className="editor">
+                                <div className="slot">
+                                    <label className="field-label">
+                                        <span className="icon">
+                                            <ion-icon name="image-outline"></ion-icon>    
+                                        </span>
+                                        <input className="file-input" type="file" hidden="hidden" accept="image/*" />
+                                    </label>
+
+                                </div>
+
+                                <label className="field-label">
+                                    <span className="icon-link">
+                                        <Icon icon="akar-icons:link-chain" />
+                                    </span>
+                                </label>
+
+
+                        </div>
+
                             {
                                 !isPosting ? 
 
