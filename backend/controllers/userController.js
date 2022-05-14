@@ -185,6 +185,9 @@ const uploadProfile = asyncHandler(async(req,res)=> {
         user.profilePicture = url
 
         const updatedUser = user.save();
+        const userInfo = localStorage.getItem("userInfo");
+        let infoItems = JSON.parse(userInfo);
+        infoItems.profilePicture = url;
 
         return res.status(200).send({
           image: url      
