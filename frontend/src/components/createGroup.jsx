@@ -74,7 +74,11 @@ const CreateGroup = () => {
                                         <ion-icon name="cloud-upload-outline"></ion-icon>
                                     </span>
                                     <span className="title">Upload photo</span>
-                                    <input className="file-input" type="file" hidden="hidden" accept="image/*" />
+                                    <input 
+                                        className="file-input" 
+                                        type="file" hidden="hidden"
+                                        accept="image/*"
+                                    />
                             </label>
 
                         </div>
@@ -88,7 +92,11 @@ const CreateGroup = () => {
                                         <ion-icon name="cloud-upload-outline"></ion-icon>
                                     </span>
                                     <span className="title">Upload photo</span>
-                                    <input className="file-input" type="file" hidden="hidden" accept="image/*" />
+                                    <input 
+                                        className="file-input"   
+                                        type="file" hidden="hidden"
+                                        accept="image/*" 
+                                    />
                             </label>
 
                         </div>
