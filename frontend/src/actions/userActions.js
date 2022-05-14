@@ -101,6 +101,7 @@ export const register = (firstName,lastName, email, password) => async (dispatch
     })
 
     localStorage.setItem('userInfo', JSON.stringify(data))
+
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -178,6 +179,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       payload: data,
     })
     localStorage.setItem('userInfo', JSON.stringify(data))
+
   } catch (error) {
     const message =
       error.response && error.response.data.message
