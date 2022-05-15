@@ -35,6 +35,7 @@ const SignUp = () => {
     }  
 
 
+
     return ( 
         <>
             <AuthStyled>
@@ -73,31 +74,33 @@ const SignUp = () => {
                         }
                   
                     <form required onSubmit={handleSubmit}>
-                     <div className="input-fields">
-                         <div className="first-last">
-                             <div className="input-single">
-                                 <p>First Name</p>
-                                <input
-                                    type="name" 
-                                    className="input-text input-flex" 
-                                    placeholder="First Name" 
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                 />
-                             </div>
-                             <div className="input-single">
-                                 <p>Last Name</p>
-                                <input 
-                                    type="name" 
-                                    className="input-text input-flex" 
-                                    placeholder="Last Name" 
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                />
-                             </div>
-                         </div>
+
+                        <div className="input-fields">
+                            <div className="first-last">
+                                <div className="input-single">
+                                    <p>First Name</p>
+                                    <input
+                                        type="name" 
+                                        className="input-text input-flex" 
+                                        placeholder="First Name" 
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="input-single">
+                                    <p>Last Name</p>
+                                    <input 
+                                        type="name" 
+                                        className="input-text input-flex" 
+                                        placeholder="Last Name" 
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </div>
+                            </div>
                      
-                         <p>Email</p>
+                        <p>Email</p>
                          <input 
                             type="email" 
                             className="input-text input-column" 
@@ -105,8 +108,9 @@ const SignUp = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                         <p>Password</p>
-                         <input 
+
+                        <p>Password</p>
+                        <input 
                             type="password" 
                             className="input-text input-column" 
                             placeholder="Password" 

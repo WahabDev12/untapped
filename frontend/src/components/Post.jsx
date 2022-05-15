@@ -4,9 +4,9 @@ import { queryAllPosts } from "../actions/postAction";
 import { Icon } from '@iconify/react';
 import { PostStyled } from "./styles/Post.Styled";
 import 'react-loading-skeleton/dist/skeleton.css';
-import { TailSpin } from "react-loader-spinner";
-import { MACHINE_LEARNING_COMM } from './assets/images/imageUrl';
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import LoadSkeleton from './LoadSkeleton';
 
 const Post  = () => {
 
@@ -25,16 +25,21 @@ const Post  = () => {
 
     return ( 
         <>
-        <PostStyled>
+        <PostStyled>    
 
+        {
+            loading && 
+            <LoadSkeleton />
+        }
+       
         <div>
         {
-            !loading && posts.length !== 0 
+            !loading && posts.length > 0
                 ? posts.map((post)=> {
                 return <a href={`/app/post/details/${post._id}`}>
                 <div key={post._id}  className="post-wrapper">
                 <div className="post-box">
-                    <div>
+                    <div>   
                         <img className="avatar"
                             src={post.author_profile}
                         />
@@ -42,9 +47,9 @@ const Post  = () => {
                     <div className="name-and-content">
                         <p>
                             <a href={`/app/profile/${post.author_id}`}>
-                            {post.author_name}</a> <small>in</small> 
+                            {post.author_name || <Skeleton />}</a> <small>in</small> 
                             <a href={`/app/group/details/${post.group_Id}`}>
-                            💡 {post.group}</a>
+                            💡 {post.group || <Skeleton />}</a>
                         </p>    
                         <a>University of Ghana . 2 days ago . 451 views</a>
                     </div>
@@ -80,22 +85,14 @@ const Post  = () => {
 
             
             }) :
+
             <div className="loading-div">
-                <TailSpin color="#ACACAC" 
-                    width="50" height="50" 
-                    ariaLabel="loading-indicator" 
-                />
-                    
+                <p>Ooops..No post yet 😥</p>
             </div>
 
          }
 
-         {
-             posts.length === 0 &&
-             <div className="loading-div">
-                 <p>Ooops..No post yet 😥</p>
-             </div>
-         }
+       
          </div>
          </PostStyled>
          </>

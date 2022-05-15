@@ -3,14 +3,14 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { PostStyled } from './styles/Post.Styled';
 
 
-const LoadingSkeleton = () => {
+const LoadSkeleton = () => {
     return (
         <>
         <PostStyled>
             <div className='post-wrapper'>
             <div className="post-box">
                     <div>
-                        <Skeleton circle={true} height={30} width={30} />
+                        <Skeleton circle={true} height={50} width={50} />
                     </div>
                     <div className="name-and-content">
                             <Skeleton width={80} />
@@ -18,7 +18,7 @@ const LoadingSkeleton = () => {
             </div>
 
             <div className='title-and-caption'>
-                <Skeleton count={3} />
+                <Skeleton count={4} />
             </div>
            
             </div>
@@ -29,4 +29,4 @@ const LoadingSkeleton = () => {
       );
 }
  
-export default LoadingSkeleton;
+export default LoadSkeleton;

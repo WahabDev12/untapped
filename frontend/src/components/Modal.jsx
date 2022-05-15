@@ -15,6 +15,7 @@ const Modal = () => {
     const [group, setGroup] = useState("")
     const [isPosting, setIsPosting] = useState(false)
     const [isPosted, setIsPosted] = useState(isPosting)
+    const [file,setFile] = useState()
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -29,6 +30,10 @@ const Modal = () => {
         dispatch(queryAllGroups())
         setIsPosting(false)
     },[])
+
+    const handleChange = (e) => {
+        setFile(e.target.files[0])
+    }
     
     const handleSubmit = (e) => { 
         e.preventDefault()
