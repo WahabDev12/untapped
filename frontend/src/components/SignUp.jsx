@@ -13,7 +13,6 @@ const SignUp = () => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [message, setMessage] = useState(null)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -28,7 +27,7 @@ const SignUp = () => {
             navigate(redirect)
         }
     }, [navigate, userInfo,redirect])
-
+    
     const handleSubmit = (e) => {   
         e.preventDefault()
         dispatch(register(firstName,lastName, email, password))
