@@ -4,7 +4,6 @@ import { queryAllPosts } from "../actions/postAction";
 import { Icon } from '@iconify/react';
 import { PostStyled } from "./styles/Post.Styled";
 import 'react-loading-skeleton/dist/skeleton.css';
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import LoadSkeleton from './LoadSkeleton';
 
@@ -47,9 +46,9 @@ const Post  = () => {
                     <div className="name-and-content">
                         <p>
                             <a href={`/app/profile/${post.author_id}`}>
-                            {post.author_name || <Skeleton />}</a> <small>in</small> 
+                            {post.author_name}</a> <small>in</small> 
                             <a href={`/app/group/details/${post.group_Id}`}>
-                            💡 {post.group || <Skeleton />}</a>
+                            💡 {post.group}</a>
                         </p>    
                         <a>University of Ghana . 2 days ago . 451 views</a>
                     </div>
