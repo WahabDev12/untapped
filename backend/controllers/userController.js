@@ -175,19 +175,19 @@ const updateUser = asyncHandler(async (req, res) => {
 const uploadProfile = asyncHandler(async(req,res)=> {
   const file = req.file;
   const user = await User.findById(req.user._id)
-  const folderPath = "profile-pics/";
+  const USER_PROFILE_PICS = "profile-pics/";
   
   if(!user) res.status(401).status("You are not authorized");
 
   if (file){
-    uploadImageToStorage(file,folderPath)
+    uploadImageToStorage(file, USER_PROFILE_PICS)
       .then((url) => {
         user.profilePicture = url
 
         const updatedUser = user.save();
-        const userInfo = localStorage.getItem("userInfo");
-        let infoItems = JSON.parse(userInfo);
-        infoItems.profilePicture = url;
+        // const userInfo = localStorage.getItem("userInfo");
+        // let infoItems = JSON.parse(userInfo);
+        // infoItems.profilePicture = url;
 
         return res.status(200).send({
           image: url      

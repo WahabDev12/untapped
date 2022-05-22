@@ -19,8 +19,8 @@ const router = express.Router();
 
 router.post('/create',protect, createPost)
 router.get('/all', queryAllPosts)
-router.post('/like/:id', protect, likePost)
-router.post('/dislike/:id', protect, dislikePost)
+router.put('/like/:id', protect, likePost)
+router.put('/dislike/:id', protect, dislikePost)
 router.put('/create/comment/:id', protect, createComment)
 router.patch('/edit/:id', protect, editPost)
 router.patch('/commentedit/:id/:comment_id', protect, editComment)

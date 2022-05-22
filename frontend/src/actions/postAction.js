@@ -51,7 +51,9 @@ export const queryAllPosts = () => async (
   }
 }
 
-export const createPost = (title, description, group) => async (dispatch, getState) => {
+
+
+export const createPost = (title, description, group,file) => async (dispatch, getState) => {
     try {
       dispatch({
         type: USER_POST_REQUEST,
@@ -66,10 +68,17 @@ export const createPost = (title, description, group) => async (dispatch, getSta
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
+
+      let postInfo = {title, description, group}
+
+      if(file){
+        postInfo = {title, description, group, file}
+
+      }
   
       const { data } = await axios.post(
         `${devPort}/api/post/create`, 
-        {title, description, group},
+        postInfo,
         config
       )
   
@@ -92,8 +101,14 @@ export const createPost = (title, description, group) => async (dispatch, getSta
         payload: message,
       })
     }
-  }
+}
 
+export const likePost = async (id, setState) => {
+  try {
+      
+  } catch (err) {
+  }
+};
   
 
 

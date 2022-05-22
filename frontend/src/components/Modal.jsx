@@ -1,5 +1,5 @@
 import { ModalStyled } from "./styles/Modal.Styled";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createPost } from "../actions/postAction";
 import { useState,useEffect } from 'react';
 import { queryAllGroups } from '../actions/groupActions';
@@ -15,7 +15,7 @@ const Modal = () => {
     const [group, setGroup] = useState("")
     const [isPosting, setIsPosting] = useState(false)
     const [isPosted, setIsPosted] = useState(isPosting)
-    const [file,setFile] = useState()
+    const [image, setImage] = useState("")
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -31,9 +31,27 @@ const Modal = () => {
         setIsPosting(false)
     },[])
 
-    const handleChange = (e) => {
-        setFile(e.target.files[0])
+    const handleImageSelect = (e) => {
+        const image = e.target.files[0];
+        if(image){
+            setImage(image)
+            toast.success("File uploaded successfully", {
+                position: toast.POSITION.BOTTOM_LEFT, 
+                autoClose: 500,
+                theme: "colored"
+            }); 
+            console.log(image)
+        }
+        else{
+            toast.error("Error uploading file", {
+                position: toast.POSITION.BOTTOM_LEFT, 
+                autoClose: 4000,
+                theme: "colored"
+            }); 
+        }
+
     }
+
     
     const handleSubmit = (e) => { 
         e.preventDefault()
@@ -43,12 +61,14 @@ const Modal = () => {
             // Show user notification
             toast.error("All fields required", {
                 position: toast.POSITION.BOTTOM_LEFT,
-                autoClose:2000,
+                autoClose: 5000,
                 theme: "colored"
             });  
         }
+
         else{
-            dispatch(createPost(title, description, group))
+
+            dispatch(createPost(title, description, group,image))
             setIsPosting(true)
             if(setIsPosting){
                 setIsPosted(false)
@@ -57,10 +77,10 @@ const Modal = () => {
             // Show user notification   
             toast.success("Post added successfully", {
                 position: toast.POSITION.BOTTOM_LEFT, 
-                autoClose:4000,
+                autoClose: 6000,
                 theme: "colored"
             });  
-            window.location.reload("/app/home")
+                // window.location.reload("/app/home")
 
         }
 
@@ -136,7 +156,12 @@ const Modal = () => {
                                         <span className="icon">
                                             <ion-icon name="image-outline"></ion-icon>    
                                         </span>
-                                        <input className="file-input" type="file" hidden="hidden" accept="image/*" />
+                                        <input className="file-input" 
+                                            type="file" 
+                                            hidden="hidden"
+                                            accept="image/*" 
+                                            onChange={handleImageSelect}
+                                        />
                                     </label>
 
                                 </div>
@@ -157,7 +182,7 @@ const Modal = () => {
                                         Post
                                 </button>
                                 :
-                                <button disabled  className="post-btn" >
+                                <button disabled className="post-btn" >
                                     <TailSpin width={20} height={20} ariaLabel="loading-indicator" />
                                 </button>
                             

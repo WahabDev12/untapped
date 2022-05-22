@@ -9,6 +9,7 @@ const createPost = asyncHandler(async (req,res) =>{
 
     const ALL_POSTS_FOLDER = "all-posts/";
     const {title, description, group} = req.body;
+    const file = req.file;
     
     const user = await User.findById(req.user._id);
   
@@ -34,12 +35,12 @@ const createPost = asyncHandler(async (req,res) =>{
         author_profile: user.profilePicture
     }
 
-    if(req.files){
+    if(file){
 
-        uploadImageToStorage(file,ALL_POSTS_FOLDER)
+        uploadImageToStorage(file, ALL_POSTS_FOLDER)
         .then((url) => {
         post = {
-            ...post,
+            ...post,                                                                                                                                                                                                                                                                                         
             image: url,
             hasImage: true,
         }
@@ -47,7 +48,7 @@ const createPost = asyncHandler(async (req,res) =>{
         })
         .catch((error) => {
           return res.status(500).send({
-            error: error
+            error: error.message
           });
         });
     }
