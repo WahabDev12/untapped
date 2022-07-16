@@ -15,16 +15,19 @@ const Post  = () => {
                 <div className="post-wrapper">
                 <div className="post-box">
                     <div>   
-                    <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+                    <img alt="" className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
 
                     </div>
                     <div className="name-and-content">
                         <p>
+                            {/* eslint-disable-next-line */}
                             <a href="">
                             Marie Currie</a> <small>in</small> 
+                        {/* eslint-disable-next-line */}
                             <a href="">
                             💡 AI and ML</a>
                         </p>    
+                        {/* eslint-disable-next-line */}
                         <a>University of Ghana . 2 days ago . 451 views</a>
                     </div>
                 </div>

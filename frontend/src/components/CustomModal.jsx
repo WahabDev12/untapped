@@ -52,7 +52,7 @@ const CustomModal = ({ close }) => {
                             />  
 
                             <br></br>
-                            <textarea className="caption"
+                            <textarea className="caption-modal"
                                 placeholder="Add a description or link (optional)"
                               
                             >
