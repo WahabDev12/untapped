@@ -3,11 +3,6 @@ import styled from "styled-components";
 
 export const ModalStyled = styled.section`
 
-
-
-
-
-
     .modal-body {
         padding-left: 30px;
     }

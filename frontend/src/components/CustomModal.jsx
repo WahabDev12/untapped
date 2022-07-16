@@ -43,6 +43,7 @@ const CustomModal = ({ close }) => {
                             </select>
 
                         </div>
+                        {/* eslint-disable-next-line */}
                         <a onClick={close} className="btn-close" aria-hidden="true">×</a>
                     </div>
 

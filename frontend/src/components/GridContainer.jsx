@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Post from "./Post";
 import Modal from 'react-modal';
 import { useState } from "react";
+import { ModalStyled } from "./styles/Modal.Styled";
 
 
 const GridContainer = () => {
@@ -44,7 +45,9 @@ const GridContainer = () => {
             onRequestClose={closeModal}
             style={customStyles}
         >
-            <CustomModal close={closeModal} />
+            <ModalStyled>
+                <CustomModal close={closeModal} />
+            </ModalStyled>
         </Modal>
         
         <ToastContainer />
