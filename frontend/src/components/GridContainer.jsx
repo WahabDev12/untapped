@@ -2,15 +2,13 @@ import "./container.css";
 import { Icon } from '@iconify/react';
 import Modal from "./Modal";
 import { MACHINE_LEARNING_COMM } from "./assets/images/imageUrl";
-import { useSelector } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Post from "./Post";
 
 const GridContainer = () => {
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
+
 
     return ( 
         <>
