@@ -89,7 +89,7 @@ const Modal = () => {
     return ( 
 
         <ModalStyled>
-        <form required onSubmit={handleSubmit}>
+        <form required>
            <div className={isPosted === true ? "close" : "modal"}
                 id="modal-one" aria-hidden="true"
             >
@@ -100,12 +100,11 @@ const Modal = () => {
                         <div className="dropdown">
 
                             <span className="user-post-name">
-                            <img alt="avatar" 
-                                 className="avatar"
-                                 src={userInfo.profilePicture} 
-                            />
-                            <a href={`/app/profile/${userInfo._id}`}>
-                                {userInfo.firstName} {userInfo.lastName} 
+                            <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+
+
+                            <a href="">
+                                Marie Currie
                             </a>
 
                             </span>
@@ -116,15 +115,18 @@ const Modal = () => {
                                onChange={(e) => {setGroup(e.target.value)}}
                             >
                             <option > Select community</option>
-
-                                {
+                                <option>Software Engineering</option>
+                                <option>Data Science</option>
+                                <option>AI and ML</option>
+                                <option>Entrepreneur</option>
+                                {/* {
                                     !loading ? groups.map((group)=> {
                                        return  <option key={group._id} value={group.name}>
                                          {group.name} </option>
                                     }) : 
 
                                     <option disabled >Loading groups...</option>
-                                }
+                                } */}
 
                             </select>
 

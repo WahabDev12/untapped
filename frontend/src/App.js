@@ -28,8 +28,8 @@ const App = () => {
             <Router>  
               <Routes>
                   
-                  <Route exact path="/" element={<LandingPage />} />
-                  <Route path="/app/home" element={<Home />} />
+                  {/* <Route exact path="/" element={<LandingPage />} /> */}
+                  <Route path="/"  element={<Home />} />
                   <Route path="/app/jobs" element={<Jobs />} />
                   <Route path="/app/communities" element={<Communities />} />
                   <Route path="/app/assessment" element={<Assessment />} />
@@ -38,8 +38,8 @@ const App = () => {
                   <Route path="/app/candidates" element={<Candidate />} />
                   <Route path="/app/software-engineering" element={<Group />} />
                   <Route  path="/app/create-group" element={<CreateGroup />} />
-                  <Route path="/app/login" element={<Login />} />
-                  <Route path="/app/signup" element={<SignUp />} />
+                  {/* <Route path="/app/login" element={<Login />} />
+                  <Route path="/app/signup" element={<SignUp />} /> */}
 
               </Routes>
 

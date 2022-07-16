@@ -8,6 +8,12 @@ import {
     POST_LIST_FAIL
 } from "../constants/postConstants";
 
+
+import {
+   USER_LIKE_SUCCESS,
+   USER_LIKE_FAIL
+} from "../constants/postConstants"
+
 export const postListReducer = (state = { posts: [] }, action) => {
     switch (action.type) {
       case POST_LIST_REQUEST:
@@ -38,5 +44,23 @@ export const postCreateReducer = (state = {}, action) => {
       default:
         return state
     }
+}
+
+
+const initialState ={
+  likes: 0
+}
+
+export const postLikeReducer = (state = {likes: 0}, action) => {
+  switch (action.type) {
+    // case USER_LIKE_REQUEST:
+    //   return { loading: true }
+    case USER_LIKE_SUCCESS:
+      return { loading: false, success: true, likes: state.likes +  action.payload }
+    // case USER_LIKE_FAIL:
+    //   return { loading: false, error: action.payload }
+    default:
+      return state
   }
+}
   

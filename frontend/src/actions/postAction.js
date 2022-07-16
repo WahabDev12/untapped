@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 import {
     USER_POST_REQUEST,
     USER_POST_SUCCESS,
@@ -9,10 +10,15 @@ import {
     POST_LIST_FAIL
 } from "../constants/postConstants";
 
+import {
+  USER_LIKE_SUCCESS,
+  USER_LIKE_FAIL
+} from "../constants/postConstants"
+
 import { logout } from './userActions'
 
 
-const devPort = "http://127.0.0.1:5000"
+const DEV_PORT = "http://127.0.0.1:5000"
 
 export const queryAllPosts = () => async (
   dispatch,getState
@@ -31,7 +37,7 @@ export const queryAllPosts = () => async (
     }
 
     const { data } = await axios.get(
-      `${devPort}/api/post/all`,
+      `${DEV_PORT}/api/post/all`,
         config,
        
     )
@@ -69,6 +75,8 @@ export const createPost = (title, description, group,file) => async (dispatch, g
         },
       }
 
+      console.log(config)
+
       let postInfo = {title, description, group}
 
       if(file){
@@ -77,7 +85,7 @@ export const createPost = (title, description, group,file) => async (dispatch, g
       }
   
       const { data } = await axios.post(
-        `${devPort}/api/post/create`, 
+        `${DEV_PORT}/api/post/create`, 
         postInfo,
         config
       )
@@ -103,12 +111,35 @@ export const createPost = (title, description, group,file) => async (dispatch, g
     }
 }
 
-export const likePost = async (id, setState) => {
-  try {
-      
-  } catch (err) {
-  }
-};
+
+
+
+
+
+// export const disLikePost =  (id, setState) => async(dispatch, getState) => {
+  
+//   const {
+//     userLogin: { userInfo },
+//   } = getState()
+  
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${userInfo.token}`,
+//     },
+//   }
+
+//   try {
+//     const response = await axios.put(
+//       `${DEV_PORT}/api/post/dislike/${id}`,
+//       );
+//     if (response.status === 200) {
+//       setState(false, response.data.likes);
+//     }
+//   } catch (err) {
+//     console.log(err.response.data);
+//   }
+// };
+  
   
 
 

@@ -10,8 +10,7 @@ export const MainGridStyled = styled.section`
   font-size:14px;
 
   @media (max-width: 950px) {
-    margin-left: 75px;
-    margin-top:5px;
+    margin:auto;
   }
 
 

@@ -19,7 +19,7 @@ export const SidebarStyled = styled.section`
   }
 
   @media (max-width: 950px) {
-    width: 75px;
+    display: none;
   }
 
 `

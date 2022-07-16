@@ -19,13 +19,13 @@ const GridContainer = () => {
         <div className="grid-item one">
             <div className="make-post">
                 <div>
-                    <img 
-                        alt="avatar" className="avatar"
-                        src={userInfo.profilePicture}
-                     />
+                <img alt="" className="avatar"
+                 src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+
+
                 </div>
                 <div className="name-and-input">
-                    <p className="user-name">{userInfo.firstName} {userInfo.lastName}</p>    
+                    <p className="user-name">Marie Currie</p>    
                     <a 
                     href="#modal-one"
                     className="btn btn-big">
@@ -56,6 +56,11 @@ const GridContainer = () => {
         <div className="grid-item three">
                    
             <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+
             <div style={{height:"50px"}}></div>
                 
         </div>

@@ -13,7 +13,7 @@ const OneTab = () => {
 
     return (  
         <>
-        <a href="/app/home">
+        <a href="/">
           <OneTabStyled>
               <div className="icon">
                   <ion-icon name="home-outline"></ion-icon>
@@ -40,15 +40,6 @@ const OneTab = () => {
           </OneTabStyled>
         </a>
 
-        <a href="/app/assessment">
-          <OneTabStyled>
-            <div className="icon">
-              <ion-icon name="school-outline"></ion-icon>
-            </div>
-            <span>Asssessments</span>
-          </OneTabStyled>
-        </a>
-
         <a href="/app/companies">
             <OneTabStyled>
               <div className="icon">
@@ -59,18 +50,16 @@ const OneTab = () => {
         </a>
 
 
-        <a href={`/app/profile/${userInfo._id}`}>
+        <a >
           <OneTabStyled>
             <div className="icon">
-              <img alt="avatar" 
-                  className="avatar" 
-                  src={userInfo.profilePicture}
-              />
+            <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+
           </div>
-            <span>{userInfo.firstName} {userInfo.lastName}</span>
+            <span>Marie Currie</span>
           </OneTabStyled>
         </a>
-        <a href="/app/communities">
+        <a href="#">
           <OneTabStyled>
               <div className="communities-tab">
                   <p>COMMUNITIES (4)</p>
@@ -78,7 +67,7 @@ const OneTab = () => {
               </div>
           </OneTabStyled>
         </a>
-        <a href="/app/general-advice">
+        <a href="#">
         <OneTabStyled>
           <div className="icon">
               <h6>💡</h6>
@@ -94,7 +83,7 @@ const OneTab = () => {
           <span>Opportunities Hub</span>
         </OneTabStyled>
 
-        <a href="/app/software-engineering">
+        <a href="#">
           <OneTabStyled>
             <div className="icon">
                 <h6>💻</h6>

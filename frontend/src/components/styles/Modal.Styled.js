@@ -286,6 +286,7 @@ export const ModalStyled = styled.section`
         .modal-dialog{
             width:30em;
             left:50%;
+            height:100%
     }
 
     .btn-close{

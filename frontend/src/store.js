@@ -15,13 +15,13 @@ import {
 import { 
     postListReducer,
     postCreateReducer,
+    postLikeReducer,
   
 } from './reducers/postReducers';
 
 
 import {
   groupListReducer
-
 } from "./reducers/groupReducers";
 
 const middleware = [thunk]
@@ -47,7 +47,6 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const initialState = {
     userLogin: { userInfo: userInfoFromStorage },
 }
-
 
 
 const store = createStore(

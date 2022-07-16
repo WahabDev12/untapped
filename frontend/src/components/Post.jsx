@@ -1,73 +1,66 @@
-import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
-import { queryAllPosts } from "../actions/postAction";
 import { Icon } from '@iconify/react';
 import { PostStyled } from "./styles/Post.Styled";
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-loading-skeleton/dist/skeleton.css'
-import LoadSkeleton from './LoadSkeleton';
+
 
 const Post  = () => {
-
-    const dispatch = useDispatch()
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
-
-    const postList = useSelector((state) => state.postList)
-    const { loading, error, posts } = postList
-
-    console.log(posts)
-
-    useEffect(()=> {
-        dispatch(queryAllPosts())
-    },[])
 
     return ( 
         <>
         <PostStyled>    
-
-        {
-            loading && 
-            <LoadSkeleton />
-        }
        
         <div>
         {
-            !loading && posts.length > 0
-                ? posts.map((post)=> {
-                return <a href={`/app/post/details/${post._id}`}>
-                <div key={post._id}  className="post-wrapper">
+                <div className="post-wrapper">
                 <div className="post-box">
                     <div>   
-                        <img className="avatar"
-                            src={post.author_profile}
-                        />
+                    <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+
                     </div>
                     <div className="name-and-content">
                         <p>
-                            <a href={`/app/profile/${post.author_id}`}>
-                            {post.author_name}</a> <small>in</small> 
-                            <a href={`/app/group/details/${post.group_Id}`}>
-                            💡 {post.group}</a>
+                            <a href="">
+                            Marie Currie</a> <small>in</small> 
+                            <a href="">
+                            💡 AI and ML</a>
                         </p>    
                         <a>University of Ghana . 2 days ago . 451 views</a>
                     </div>
                 </div>
            
-                   <div key={post._id} className="title-and-caption">
-                            <p className="title">{post.title}</p>   
-                            <p className="caption">{post.description} </p> 
+                   <div  className="title-and-caption">
+                            <p className="title">Welcome to Untapped Homepage</p>   
+                            <p className="caption">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                            </p> 
                     <div className="reactions-tab">
-                        <button className="react-btn">
+                         
+                         {/* <Like id={post._id} likes={post.likes.length} /> */}
+                         <button  className="react-btn" >
                             <Icon icon="akar-icons:heart" width="14" inline={true} />
                             <span>
-                                {post.likes.length} Likes
+                            20
                             </span>
                         </button> 
+                        <button  className="react-btn-small" >
+                            <Icon icon="akar-icons:heart" width="14" inline={true} />
+                            <span>
+                            20
+                            </span>
+                        </button> 
+
                         <button className="react-btn comment-btn">
                             <Icon icon="fa6-regular:comment" width="14" inline={true} /> 
                             <span>
-                                {post.comments.length} Comments
+                                10 comments
+                            </span>
+                        </button>
+                        <button className="react-btn comment-btn-small">
+                            <Icon icon="fa6-regular:comment" width="14" inline={true} /> 
+                            <span>
+                                10
                             </span>
                         </button>
                         <button className="react-btn">
@@ -80,14 +73,9 @@ const Post  = () => {
                     </div>
 
                 </div>
-                </a>
 
             
-            }) :
-
-            <div className="loading-div">
-                <p>Ooops..No post yet 😥</p>
-            </div>
+    
 
          }
 

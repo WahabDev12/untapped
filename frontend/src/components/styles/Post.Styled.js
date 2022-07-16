@@ -381,12 +381,57 @@ export const PostStyled = styled.section`
     margin-top:3rem;
     border:1px solid #666;
 }
+
+.comment-btn-small{
+  display: none;
+}
+
+.react-btn-small{
+  display: none;
+}
     
 
   /* RESPONSIVENESS*/
   @media (max-width: 950px) {
+    overflow-x: hidden;
     #grid-container {
-      grid-template-columns: 100%;
+      width:100%;
+      margin:auto;
+    }
+
+    .reactions-tab{
+      width:250px;
+    }
+
+    .react-btn{
+        width:80px;
+    }
+
+
+    .comment-btn{
+      display: none;
+    }
+
+    .comment-btn-small{
+      display: flex;
+      width:60px;
+    }
+
+    .title-and-caption{
+      display: block;
+      align-items: center;
+      margin-left:1em;
+      margin-top:0.8em;
+    }
+
+    .title{
+       font-size: 15px;
+    }
+
+    .post-wrapper{
+      width:100%;
+      box-shadow: 20px 2px 8px rgba(41, 40, 40, 0.08);
+      border:1px solid rgba(41, 40, 40, 0.08)
     }
 
     .name-and-input > a{
