@@ -40,7 +40,7 @@ const OneTab = () => {
           </OneTabStyled>
         </a>
 
-        <a href="/app/companies">
+        <a href="#">
             <OneTabStyled>
               <div className="icon">
                 <Icon icon="cil:building" />
