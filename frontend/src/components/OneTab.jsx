@@ -2,13 +2,10 @@ import { OneTabStyled } from "./styles/OneTab.Styled";
 import { Icon } from '@iconify/react';
 import "./topsection.css";
 import { SideInputStyled } from "./styles/SideInputStyled";
-import { useSelector } from "react-redux";
 
 
 const OneTab = () => {
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
 
 
     return (  
@@ -40,7 +37,7 @@ const OneTab = () => {
           </OneTabStyled>
         </a>
 
-        <a href="#">
+        <a href="/app/companies">
             <OneTabStyled>
               <div className="icon">
                 <Icon icon="cil:building" />
@@ -49,17 +46,18 @@ const OneTab = () => {
             </OneTabStyled>
         </a>
 
-
+        {/* eslint-disable-next-line */}
         <a >
           <OneTabStyled>
             <div className="icon">
-            <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
+            <img alt="" className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
 
           </div>
             <span>Marie Currie</span>
           </OneTabStyled>
         </a>
-        <a href="#">
+        {/* eslint-disable-next-line */}
+        <a href="/app/create-group">
           <OneTabStyled>
               <div className="communities-tab">
                   <p>COMMUNITIES (4)</p>
@@ -67,6 +65,7 @@ const OneTab = () => {
               </div>
           </OneTabStyled>
         </a>
+        {/* eslint-disable-next-line */}
         <a href="#">
         <OneTabStyled>
           <div className="icon">
@@ -82,7 +81,7 @@ const OneTab = () => {
         </div>
           <span>Opportunities Hub</span>
         </OneTabStyled>
-
+        {/* eslint-disable-next-line */}
         <a href="#">
           <OneTabStyled>
             <div className="icon">

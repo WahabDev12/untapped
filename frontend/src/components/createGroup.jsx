@@ -30,7 +30,7 @@ const CreateGroup = () => {
                         <div className="group-name">
                             Community Name
                         </div>
-
+                            {/* eslint-disable-next-line */}
                         <a className="members__privacy" href="">
                             0 members | <ion-icon name="earth-outline"></ion-icon> Public
                         </a>
@@ -48,6 +48,7 @@ const CreateGroup = () => {
 
                         <div className="banner">
                             <img 
+                            alt=""
                             src="https://img.icons8.com/external-filled-outline-02-chattapat-/180/000000/external-community-social-media-filled-outline-02-chattapat-.png"
                             />
                         </div>
@@ -123,7 +124,7 @@ const CreateGroup = () => {
                             <input className="checkbox-input" type="checkbox" />
                             <span className="terms-text">
                                 I have read the <a className="link-to" href="/app/terms-and-conditions">
-                                    Spotlight Code of Conduct</a> and I agree to enforce it in my community
+                                    Untapped Code of Conduct</a> and I agree to enforce it in my community
                             </span>
                         </label>
                         </div>

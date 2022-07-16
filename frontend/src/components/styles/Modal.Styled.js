@@ -4,51 +4,9 @@ import styled from "styled-components";
 export const ModalStyled = styled.section`
 
 
-    .modal:before {
-        content: "";
-        display: none;
-        background: rgba(0, 0, 0, 0.6);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 10;
-    }
 
-    .modal:target:before {
-        display: block;
-    }
 
-    .modal:target .modal-dialog {
-        -webkit-transform: translate(0, 0);
-        -ms-transform: translate(0, 0);
-        transform: translate(0, 0);
-        top: 20%;
-    }
 
-    .modal-dialog {
-        background: #fefefe;
-        border-radius: 8px;
-        margin-left: -200px;
-        position: fixed;
-        left: 40%;
-        top: -100%;
-        z-index: 11;
-        height:48%;
-        max-height:100%;
-        width: 47em;
-        max-width: 100%;
-        -webkit-transform: translate(0, -500%);
-        -ms-transform: translate(0, -500%);
-        transform: translate(0, -500%);
-        transition: transform 0.4s ease-out;
-        
-    }
-
-    .adjust{
-        height:57%;
-    }
 
     .modal-body {
         padding-left: 30px;
@@ -197,6 +155,7 @@ export const ModalStyled = styled.section`
         text-align: center;
         font-size: 28px;
         background-color:#fff;
+        cursor: pointer;
    }
 
    .error-wrapper{

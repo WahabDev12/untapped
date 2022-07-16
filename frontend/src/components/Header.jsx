@@ -8,7 +8,7 @@ const Header = () => {
         <HeaderStyled>
         <img alt="logo" src={LOGO_URL} />    
         
-            <h2>spotlight</h2>
+            <h2>untapped</h2>
              <span className="settings">
                 <ion-icon name="settings-outline"></ion-icon>
              </span>

@@ -1,18 +1,46 @@
 import Sidebar from "./Sidebar";
-import { MainGridStyled } from "./styles/MainGrid.Styled";
+import { HideScroll } from "./styles/HideScroll";
+import { SectionStyled } from "./styles/Section.Styled";
+import { ContainerStyled } from "./styles/Container.Styled";
+import IndieCompany from "./IndieCompany";
 
 const Companies = () => {
     return ( 
         <>
+        
         <Sidebar />
-        <MainGridStyled>
-            <div className="Companies">
-                
-            <h3>This is the companies tab</h3>    
+        <HideScroll>
+        <SectionStyled>
+        
+        <div className="jobs-sort">
+            <div className="btn-sort-one">
+
+            <button>Company</button>
+            <button>Stage</button>
+            <button>Sector</button>
+            <button>Location</button>
+            <button>Size</button>
+
+
             </div>
 
-        </MainGridStyled>
-        </>
+
+        </div>
+        </SectionStyled>
+      
+        <ContainerStyled>
+
+        <p className="alert">BROWSE SOME COMPANIES</p>
+        {/* Input candidates profiles here */}
+        <IndieCompany />
+            
+        
+
+
+        </ContainerStyled>
+
+        </HideScroll>
+    </>
      );
 }
  

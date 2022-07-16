@@ -4,12 +4,9 @@ import TopSection from "./TopSection";
 import "./container.css";
 import Sidebar from './Sidebar';
 import ThreeCards from "./ThreeCards";
-import { useSelector } from "react-redux";
 
 const Home = () => {
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
 
     return (  
         <>

@@ -3,7 +3,6 @@ import { GlobalStyles } from './components/styles/Global';
 import { ThemeProvider } from 'styled-components';
 import Home from './components/Home';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
-import LandingPage from './components/landingPage';
 import Jobs from './components/Jobs';
 import Communities from './components/Communities';
 import Assessment from './components/Assessment';
@@ -12,8 +11,7 @@ import Profile from './components/Profile';
 import Candidate from './components/Candidate';
 import Group from './components/GroupTemplate';
 import CreateGroup from "./components/createGroup";
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+
 
 const App = () => {
 
