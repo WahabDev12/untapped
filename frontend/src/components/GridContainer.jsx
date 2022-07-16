@@ -45,9 +45,7 @@ const GridContainer = () => {
             onRequestClose={closeModal}
             style={customStyles}
         >
-            <ModalStyled>
                 <CustomModal close={closeModal} />
-            </ModalStyled>
         </Modal>
         
         <ToastContainer />

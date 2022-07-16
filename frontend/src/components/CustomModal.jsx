@@ -1,13 +1,11 @@
-import { ModalStyled } from "./styles/Modal.Styled";
 import { Icon } from '@iconify/react';
-
+import "./styles/modal.css"
 
 const CustomModal = ({ close }) => {
 
 
     return ( 
         <>
-        <ModalStyled>
         <form required>
            <div className="modal"
                 id="modal-one" aria-hidden="true"
@@ -65,7 +63,7 @@ const CustomModal = ({ close }) => {
                             <div className="editor">
                                 <div className="slot">
                                     <label className="field-label">
-                                        <span className="icon">
+                                        <span className="icon-modal">
                                             <ion-icon name="image-outline"></ion-icon>    
                                         </span>
                                         <input className="file-input" 
@@ -99,7 +97,6 @@ const CustomModal = ({ close }) => {
                 
             </div>
         </form>
-        </ModalStyled>
         </>
      );
 }
