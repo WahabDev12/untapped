@@ -26,12 +26,6 @@ Live Demo: https://untapped.vercel.app/
 - styles
 - assets
 
-
-#### Disclaimer: ENV variables
-
-- You also need to create a [Firebase](https://firebase.google.com) account inorder to get the API KEYS for user authentication
-- Create a `.env` file in the root directory to store all your env secrets
-
 ### Installation
 
 Clone the repo
