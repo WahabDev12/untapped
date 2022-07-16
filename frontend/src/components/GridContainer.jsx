@@ -25,7 +25,7 @@ const GridContainer = () => {
                 <div className="name-and-input">
                     <p className="user-name">Marie Currie</p>    
                     <a 
-                    href="#modal-one"
+                    href="#"
                     className="btn btn-big">
                         Ask questions or share with the community....
                     </a>
@@ -169,7 +169,7 @@ const GridContainer = () => {
         </div>
       </section> 
 
-     <Modal />
+     {/* <Modal /> */}
 
      </> 
     
