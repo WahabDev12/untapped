@@ -20,7 +20,7 @@ const CustomModal = ({ close }) => {
                                 {/* eslint-disable-next-line */}
                             <img className="avatar" src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-4--v1.png"/>
 
-                        {/* eslint-disable-next-line */}
+                             {/* eslint-disable-next-line */}
                             <a href="">
                                 Marie Currie
                             </a>

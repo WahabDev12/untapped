@@ -36,7 +36,7 @@ git clone https://github.com/WahabDev12/untapped.git
 Go into project directory
 
 ```
-cd untapped
+cd untapped/frontend
 ```
 
 Install packages and dependencies
